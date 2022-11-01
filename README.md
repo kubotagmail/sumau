@@ -1,24 +1,35 @@
-# README
+# アプリ名
+SUMAU
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+気になった物件情報を登録できるアプリ
 
-Things you may want to cover:
+### サイトテーマ
+物件情報を登録することができるサイト
 
-* Ruby version
 
-* System dependencies
+### テーマを選んだ理由
+他社サイトに掲載されていない物件や、自分が気になった物件の情報を登録できるようにすることで、
+ユーザーが物件探しなどの際に、比較検討できるようにしたいと思ったからです。
 
-* Configuration
+### ターゲットユーザ
+物件を探している人
 
-* Database creation
+### 主な利用シーン
+物件探し、気になった物件を把握したい時
 
-* Database initialization
+## 設計書
+ER図:　URL
+テーブル定義書:　URL
+詳細設計書:　URL
 
-* How to run the test suite
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
+- 使用しない場合は、使用素材の項目をREADMEから削除してください。
