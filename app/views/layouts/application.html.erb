@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-  
+
   <head>
     <title>Sumau</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <style>
@@ -31,7 +30,16 @@
                   <%= link_to "マイページ", public_my_page_path, class: "btn btn-outline-light" %>
                 </li>
                 <li class="mx-3">
-                  <%= link_to "ログアウト", destroy_customer_session_path, class: "btn btn-outline-light" %>
+                  <%= link_to "物件一覧", public_properties_path, class: "btn btn-outline-light" %>
+                </li>
+                <li class="mx-3">
+                  <%= link_to "ブックマーク一覧", public_favorites_path, class: "btn btn-outline-light" %>
+                </li>
+                <li class="mx-3">
+                  <%= link_to "物件情報新規登録", new_public_property_path, class: "btn btn-outline-light" %>
+                </li>
+                <li class="mx-3">
+                  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-light" %>
                 </li>
               <!--管理者用ヘッダー  -->
               <% elsif admin_signed_in? %>
@@ -65,10 +73,10 @@
       </nav>
     </header>
     <%= yield %>
-    
+
     <footer>
     </footer>
-    
+
   </body>
-  
+
 </html>
