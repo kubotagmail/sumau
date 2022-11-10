@@ -1,16 +1,74 @@
 <!DOCTYPE html>
 <html>
+  
   <head>
-    <title>SumauPf</title>
+    <title>Sumau</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+      header{
+        background-color: #494949;
+      }
+    </style>
   </head>
 
   <body>
+    <header class= "shadow">
+      <nav class= "navbar navbar-expand-lg" >
+        <div class= "container" >
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class= "navbar-nav ml-auto">
+              <!--顧客用ヘッダー-->
+              <% if customer_signed_in? %>
+                <li class="mx-3">
+                  <%= link_to "トップページ", root_path, class: "btn btn-outline-light" %>
+                </li>
+                <li class="mx-3">
+                  <%= link_to "マイページ", public_my_page_path, class: "btn btn-outline-light" %>
+                </li>
+                <li class="mx-3">
+                  <%= link_to "ログアウト", destroy_customer_session_path, class: "btn btn-outline-light" %>
+                </li>
+              <!--管理者用ヘッダー  -->
+              <% elsif admin_signed_in? %>
+              <li>
+                <%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-light" %>
+              </li>
+              <li>
+                <%= link_to "間取り一覧", admin_floor_plans_path, class: "btn btn-outline-light" %>
+              </li>
+              <li>
+                <%= link_to "物件種別一覧", admin_property_types_path, class: "btn btn-outline-light" %>
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_admin_session_path, class: "btn btn-outline-light" %>
+              </li>
+              <!--ログイン前ヘッダー-->
+              <% else %>
+                <li class="mx-3">
+                  <%= link_to "トップページ", root_path, class: "btn btn-outline-light" %>
+                </li>
+                <li class="mx-3">
+                  <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-light" %>
+                </li>
+                <li class="mx-3">
+                  <%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-light" %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
     <%= yield %>
+    
+    <footer>
+    </footer>
+    
   </body>
+  
 </html>
