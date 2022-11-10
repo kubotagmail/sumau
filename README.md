@@ -25,9 +25,9 @@
 - 自分が登録した物件を閲覧したいとき
 
 ## 設計書
-ER図:　URL
-テーブル定義書:　URL
-詳細設計書:　URL
+ER図:　https://app.diagrams.net/#G1oEpXMF_wEAA_bqPfHDrfUDSV-jg8veDH
+テーブル定義書:　https://docs.google.com/spreadsheets/d/1Q6CCXHkNoccyZBypPoVxUNXnbaY_0L_nCesvF2iGWpw/edit#gid=176020119
+詳細設計書:　https://docs.google.com/spreadsheets/d/1JpjwFHbDTdMkF9vnld0u_S5ACQwDame9iX68hQZSAGc/edit#gid=549108681
 
 ## 開発環境
 - OS：Linux(CentOS)
