@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   root to: "public/homes#top"
 
   namespace :admin do
-    get '/admin' => 'homes#top'
+    get '/home/top' => 'homes#top'
     resources :floor_plans, only: [:index, :create, :edit, :update]
     resources :property_types, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     patch '/customers' => 'customers#update', as: 'update'
     get '/customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     patch '/customers/withdraw' => 'customers#withdraw', as: 'withdraw'
+
     get 'properties/favorites' => 'favorites#index', as: 'favorites'
     resources :properties do
       resource :favorite, only: [:create, :destroy]
