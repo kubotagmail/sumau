@@ -1,0 +1,2 @@
+class FloorPlan < ApplicationRecord
+end
