@@ -6,4 +6,10 @@ class Customer < ApplicationRecord
          
   has_many :properties, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  
+  # 退会済みのユーザーが同じアカウントでログイン出来ないようにする
+  # def  active_for_authentication?
+  #   super && (is_deleted == false)
+  # end
+  
 end
