@@ -58,9 +58,13 @@ ActiveRecord::Schema.define(version: 2022_11_09_061434) do
   end
 
   create_table "properties", force: :cascade do |t|
-    t.integer "customer_id"
-    t.integer "property_type_id"
-    t.integer "floor_type_id"
+    t.integer "customer_id", null: false
+    t.integer "property_type_id", null: false
+    t.integer "floor_type_id", null: false
+    t.string "location", null: false
+    t.text "description", null: false
+    t.integer "price", null: false
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
