@@ -29,6 +29,7 @@ class Admin::PropertyTypesController < ApplicationController
   end
 
   private
+  
   def property_type_params
     params.require(:property_type).permit(:name)
   end
