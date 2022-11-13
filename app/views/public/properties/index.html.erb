@@ -1,2 +1,38 @@
 <!--会員側 物件一覧-->
-物件一覧ページ
+<div class="container mt-5">
+  <div class="row">
+    <h2 class="px-3">物件一覧</h2>
+  </div>
+  <div class="search_form">
+    <table class="table">
+      <thead class= "table-secondary">
+        <tr>
+          <th>物件種別</th>
+          <th>価格</th>
+          <th>所在地</th>
+          <th>間取り</th>
+          <th>販売状況</th>
+          <th></th>
+        </tr>
+      </thead>
+      <% @properties.each do |property| %>
+        <tbody>
+          <tr>
+            <td class="align-middle"><%= property.property_type.name %></td>
+            <td class="align-middle"><%= property.price.to_s(:delimited) %>万円</td>
+            <td class="align-middle"><%= property.location %></td>
+            <td class="align-middle"><%= property.floor_plan.name %></td>
+            <% if property.is_active == true %>
+              <td class="align-middle text-success font-weight-bold">販売中</td>
+            <% else %>
+              <td class="align-middle font-weight-bold">販売停止中</td>
+            <% end %>
+            <td class="align-middle">
+              <%= link_to "詳細を見る", public_property_path(property.id) %>
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>
