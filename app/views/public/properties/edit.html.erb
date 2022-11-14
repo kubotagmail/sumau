@@ -1,2 +1,65 @@
 <!--会員側 物件情報編集画面-->
-物件情報編集ページ
+
+<div class="container">
+  <div class = "d-flex flex-row bd-highlight mb-3 ml-5 mt-5">
+    <div class="p-2 bd-highlight">
+      <div class= "row">
+        <h2 class="px-3">物件情報編集</h2>
+      </div>
+    </div>
+  </div>
+  <%= form_with model: @property, url: public_property_path(@property.id), method: :patch, local:true do |f| %>
+    <table>
+      <tr>
+        <div class="form-group">
+          <th><%= f.label :所在地 %></th>
+          <td><%= f.text_field :location, size: "100*20", placeholder:"所在地" %></td>
+        </div>
+      </tr>
+      <tr>
+        <div class="form-group">
+          <th><%= f.label :価格 %></th>
+          <td><%= f.text_field :price, placeholder:"3980" %>万円</td>
+        </div>
+      </tr>
+      <tr>
+        <div class="form-group">
+          <th><%= f.label :物件画像 %></th>
+          <td><%= f.file_field :image, accept: 'image/*' %></td>
+        </div>
+      </tr>
+      <tr>
+        <div class="form-group">
+          <th><%= f.label :物件種別 %></th>
+          <td><%= f.collection_select :property_type_id, PropertyType.all, :id, :name ,:prompt => "--選択してください--" %></td>
+        </div>
+      </tr>
+      <tr>
+        <div class="form-group">
+          <th><%= f.label :間取り %></th>
+          <td><%= f.collection_select :floor_plan_id, FloorPlan.all, :id, :name ,:prompt => "--選択してください--" %></td>
+        </div>
+      </tr>
+      <tr>
+        <div class="form-group">
+          <th><%= f.label :物件メモ %></th>
+          <td><%= f.text_area :description, size: "100*100", placeholder:"ここに説明文を記述します" %></td>
+        </div>
+      </tr>
+      <tr>
+        <div class="form-group">
+          <th><%= f.label :販売状況 %></th>
+            <td>
+              <%= f.select :sales_status,Property.sales_statuses_i18n, {}, class: 'sales_status-select' %>
+            </td>
+        </div>
+      </tr>
+      <tr>
+        <div class="form-action">
+          <td><%= f.submit "保存する", class:"btn btn-success" %></td>
+          <td width="100"><%= link_to "削除する", public_property_path(@property), method: :delete, class: 'btn btn-danger' %></td>
+        </div>
+      </tr>
+    </table>
+  <% end %>
+</div>

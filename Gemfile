@@ -42,6 +42,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'pry-byebug'
+
 end
 
 group :test do
@@ -57,3 +59,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 gem 'kaminari','~> 1.2.1'
+gem 'image_processing', '~> 1.2'
+gem 'net-smtp'
+gem 'net-pop'
+gem 'net-imap'
+gem "enum_help"
