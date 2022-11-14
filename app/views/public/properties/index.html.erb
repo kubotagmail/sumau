@@ -22,10 +22,10 @@
             <td class="align-middle"><%= property.price.to_s(:delimited) %>万円</td>
             <td class="align-middle"><%= property.location %></td>
             <td class="align-middle"><%= property.floor_plan.name %></td>
-            <% if property.is_active == true %>
-              <td class="align-middle text-success font-weight-bold">販売中</td>
+            <% if property.sales_status = 0 %>
+              <td class="align-middle text-success font-weight-bold"><%= property.sales_status_i18n %></td>
             <% else %>
-              <td class="align-middle font-weight-bold">販売停止中</td>
+              <td class="align-middle font-weight-bold"><%= property.sales_status_i18n %></td>
             <% end %>
             <td class="align-middle">
               <%= link_to "詳細を見る", public_property_path(property.id) %>

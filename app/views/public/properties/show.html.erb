@@ -29,16 +29,16 @@
           <td>間取り</td>
           <td><%=@property.floor_plan.name %></td>
         </tr>
-        
+
         <tr height="20">
           <td>販売状況</td>
-          <% if @property.is_active == true %>
-            <td class="text-success"><b>販売中</b></td>
+          <% if @property.sales_status = 0 %>
+            <td class="text-success"><b><%= @property.sales_status_i18n %></b></td>
           <% else %>
-            <td class="text-danger"><b>販売停止中</b></td>
+            <td class="text-danger"><b><%= @property.sales_status_i18n %></b></td>
           <% end %>
         </tr>
-        
+
         <tr height="20">
           <td>物件メモ</td>
           <!--< %= simple_format(@property.description) %>simple_formatで改行を反映させる-->

@@ -5,8 +5,8 @@
       <h2 class="px-3">物件情報新規登録</h2>
     </div>
   </div>
-  <table>
-    <%= form_with model: @property, url:public_properties_path, method: :post, local:true do |f| %>
+  <%= form_with model: @property, url:public_properties_path, method: :post, local:true do |f| %>
+    <table>
       <tr>
         <div class="form-group">
           <th><%= f.label :所在地 %></th>
@@ -47,10 +47,7 @@
         <div class="form-group">
           <th><%= f.label :販売状況 %></th>
           <td>
-            <%= f.radio_button :is_active, true, checked: true %>
-            <%= f.label :is_active, "販売中" %>
-            <%= f.radio_button :is_active, false %>
-            <%= f.label :is_active, "販売停止中" %>
+            <%= f.select :sales_status, Property.sales_statuses_i18n, class: 'sales_status-select' %>
           </td>
         </div>
       </tr>
@@ -59,6 +56,6 @@
           <th><%= f.submit "新規登録", class:"btn btn-success" %></th>
         </div>
       </tr>
-    <% end %>
-  </table>
+    </table>
+  <% end %>
 </div>

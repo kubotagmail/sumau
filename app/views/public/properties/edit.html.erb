@@ -7,9 +7,9 @@
         <h2 class="px-3">物件情報編集</h2>
       </div>
     </div>
-  </div>   
-  <table>
-    <%= form_with model: @property, url: public_property_path(@property.id), method: :patch, local:true do |f| %>
+  </div>
+  <%= form_with model: @property, url: public_property_path(@property.id), method: :patch, local:true do |f| %>
+    <table>
       <tr>
         <div class="form-group">
           <th><%= f.label :所在地 %></th>
@@ -49,19 +49,17 @@
       <tr>
         <div class="form-group">
           <th><%= f.label :販売状況 %></th>
-          <td>
-            <%= f.radio_button :is_active, true, checked: true %>
-            <%= f.label :is_active, "販売中" %>
-            <%= f.radio_button :is_active, false %>
-            <%= f.label :is_active, "販売停止中" %>
-          </td>
+            <td>
+              <%= f.select :sales_status,Property.sales_statuses_i18n, {}, class: 'sales_status-select' %>
+            </td>
         </div>
       </tr>
       <tr>
         <div class="form-action">
-          <th><%= f.submit "保存する", class:"btn btn-success" %></th>
+          <td><%= f.submit "保存する", class:"btn btn-success" %></td>
+          <td width="100"><%= link_to "削除する", public_property_path(@property), method: :delete, class: 'btn btn-danger' %></td>
         </div>
       </tr>
-    <% end %>
-  </table>
+    </table>
+  <% end %>
 </div>

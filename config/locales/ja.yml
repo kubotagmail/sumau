@@ -1,0 +1,8 @@
+ja:
+  enums:
+    property:
+      sales_status:
+        on_sale: "販売中"
+        stop_selling: "販売停止中"
+        with_application: "申し込みあり"
+        closed: "成約済み"
