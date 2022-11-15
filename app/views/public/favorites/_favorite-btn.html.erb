@@ -1,0 +1,14 @@
+<!--ブックマークの部分テンプレート-->
+<% if property.favorited_by?(current_customer) %>
+  <!--remote: trueで余裕があれば非同期化-->
+  <%= link_to public_property_favorite_path(property), method: :delete do %>
+  <!--< %= property.favorites.count %>ブックマーク登録数-->
+    <i class="fas fa-bookmark"></i>
+  <% end %>
+<% else %>
+  <!--remote: true　非同期化-->
+  <%= link_to public_property_favorite_path(property), method: :post do %>
+  <!--一旦、< %= property.favorites.count %>ブックマーク登録数-->
+    <i class="far fa-bookmark"></i>
+  <% end %>
+<% end %>
