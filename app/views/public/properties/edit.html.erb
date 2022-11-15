@@ -43,14 +43,14 @@
       <tr>
         <div class="form-group">
           <th><%= f.label :物件メモ %></th>
-          <td><%= f.text_area :description, size: "100*100", placeholder:"ここに説明文を記述します" %></td>
+          <td><%= f.text_area :description, style: "height: 500px; width: 100%", placeholder:"ここに説明文を記述します" %></td>
         </div>
       </tr>
       <tr>
         <div class="form-group">
           <th><%= f.label :販売状況 %></th>
             <td>
-              <%= f.select :sales_status,Property.sales_statuses_i18n, {}, class: 'sales_status-select' %>
+              <%= f.select :sales_status,Property.sales_statuses.keys.map {|k| [I18n.t("enums.property.sales_status.#{k}"), k]}, class: 'sales_status-select' %>
             </td>
         </div>
       </tr>
