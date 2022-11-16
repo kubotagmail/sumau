@@ -12,10 +12,16 @@
       <h4><strong>登録情報</strong></h4>
     </div>
     <div class="col-2 my-1 pl-0 pb-2">
-      <%= link_to "編集する",public_edit_path, class:"btn btn-success btn-block" %>
+    <!--ゲストユーザーでログインしている場合、編集のページへいけないようにする-->
+      <% if current_customer.address == "guestuser.address1234567890" %>
+        <%= link_to "編集する", "#", class:"btn btn-success btn-block", data: { confirm: "ゲストユーザーは編集できません。" }  %>
+      <% else %>
+        <%= link_to "編集する", public_edit_path, class:"btn btn-success btn-block" %>
+      <% end %>
     </div>
+    <!---->
   </div>
-  
+
     <table class="col-9 table table-bordered">
       <tbody>
         <tr>
