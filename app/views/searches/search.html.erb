@@ -1,7 +1,7 @@
-<!--会員側 物件一覧-->
+<!--物件検索結果-->
 <div class="container mt-5">
   <div class="row">
-    <h2 class="px-3">物件一覧</h2>
+    <h2 class="px-3">"<%= params[:word] %>"の検索結果一覧</h2>
     <div class='col-md-14 offset-md-4'>
       <!--検索用の部分テンプレート呼び出し-->
       <%= render 'searches/search' %>
