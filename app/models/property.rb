@@ -23,5 +23,29 @@ class Property < ApplicationRecord
     end
       image.variant(resize_to_limit: [width, height]).processed
   end
+
+  # 検索方法分岐
+  # whereメソッドを使いデータベースから該当データを取得し、変数に代入する。
+  # "%#{word}%" で前後で部分一致
+  # LIKE?は「〜のような」≒のイメージ完全なイコールではなくあいまい
+  def self.looks(search, word)
+    # if word.empty?
+    #   return Property.all
+    # end
+    if search == "property_type"
+      properties = Property.where(property_type_id:PropertyType.where("name LIKE?", "%#{word}%" ).pluck(:id))
+    elsif search == "location"
+      properties = Property.where("location LIKE?", "%#{word}%" )
+    elsif search == "floor_plan"
+      properties = Property.where(floor_plan_id:FloorPlan.where("name LIKE?", "%#{word}%" ).pluck(:id))
+    else
+      # 空を返す場合の記述
+      # properties = []
+      # 全部返す場合の記述
+      properties = Property.all
+    end
+    return properties
+  end
+
 end
 
