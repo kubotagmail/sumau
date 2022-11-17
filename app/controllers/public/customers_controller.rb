@@ -14,19 +14,15 @@ class Public::CustomersController < ApplicationController
     redirect_to public_my_page_path
   end
 
-  # 顧客の退会確認画面
-  # 不要なアクションかもしれない
   # def unsubscribe
   # end
 
-
   # 顧客の退会処理(ステータスの更新)
-  # 後で編集する
   def withdraw
     current_customer.update(is_deleted: true)
     # sessionの削除
     reset_session
-    redirect_to root_path
+    redirect_to new_customer_session_path
   end
 
   private

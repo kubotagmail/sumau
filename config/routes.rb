@@ -12,6 +12,14 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
+  # ゲストログイン用
+  devise_scope :customer do
+    post 'public/customers/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+
+  # 検索用
+  get "search" => "searches#search"
+
   root to: "public/homes#top"
 
   namespace :admin do
@@ -28,7 +36,8 @@ Rails.application.routes.draw do
     get '/customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     patch '/customers/withdraw' => 'customers#withdraw', as: 'withdraw'
 
-    get 'properties/favorites' => 'favorites#index', as: 'favorites'
+      get 'properties/favorites' => 'favorites#index', as: 'favorites'
+
     resources :properties do
       resource :favorite, only: [:create, :destroy]
       # destroyするときの挙動によるresources :favorite, only: [:create, :destroy]
