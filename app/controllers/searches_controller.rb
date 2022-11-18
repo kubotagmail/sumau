@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
-  
+
   def search
     # 検索方法→params[:search]
     # 検索ワード→params[:word]
@@ -9,5 +9,5 @@ class SearchesController < ApplicationController
     # end
 
   end
-  
+
 end
