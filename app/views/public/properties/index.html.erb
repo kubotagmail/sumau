@@ -16,6 +16,7 @@
           <th>所在地</th>
           <th>間取り</th>
           <th>販売状況</th>
+          <th>評価</th>
           <th></th>
           <th></th>
         </tr>
@@ -36,6 +37,25 @@
             <% else %>
               <td class="align-middle font-weight-bold"><%= property.sales_status_i18n %></td>
             <% end %>
+            <!--ここからが星レビュー機能-->
+            <td class="align-middle font-weight-bold" id="star-rate<%#= @property.id %>">
+              <%#= f.hidden_field :star, id: :review_star %>⭐️
+              <script>
+                //  $('#star-rate< %= @property.id %>').empty();  #これがないとブラウザバックで星が増え続ける不具合が発生する。
+                //  readOnly: true,                               #読み取り専用、編集できないようにする。
+                //  score: < %= @property.star %>,                #@property = Property.find(params[:id])のstarカラムを取り出す。
+                $('#star-rate<%#= property.id %>').empty();
+                $('#star-rate<%#= property.id%>').raty({
+                size      : 36,
+                starOff   : '<%#= asset_path('star-off.png') %>',
+                starOn    : '<%#= asset_path('star-on.png') %>',
+                half      : false,
+                readOnly  : true,
+                score     : <%#= property.star %>,
+                });
+              </script>
+            </td>
+            <!--ここまでが星レビュー機能-->
 
             <td class="align-middle">
               <!--ブックマーク機能の部分テンプレート呼び出し-->

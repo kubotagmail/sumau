@@ -51,6 +51,27 @@
         </div>
       </tr>
       <tr>
+      <!--ここからが星レビュー機能-->
+      <div class="form-group row" id="star">
+        <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %>
+        <%= f.hidden_field :star, id: :review_star %>
+      </div>
+      <script>
+        // $('#star').empty();              #これがないとブラウザバックで星が増え続ける不具合が発生する。
+        // scoreName: 'Property[star]',     #これがPropertyモデルのstarカラムへ値を保存という意味になる。
+        // half: false,                     #今回は５段階評価で⭐️半分評価は入力できないように設定する。
+        $('#star').empty();
+        $('#star').raty({
+        size: 36,
+        starOff: '<%#= asset_path('star-off.png') %>',
+        starOn : '<%#= asset_path('star-on.png') %>',
+        scoreName: 'Property[star]',　
+        half: false,
+        });
+      </script>
+      <!--ここまでが星レビュー機能-->
+      </tr>
+      <tr>
         <div class="form-action">
           <th><%= f.submit "新規登録", class:"btn btn-success" %></th>
         </div>
