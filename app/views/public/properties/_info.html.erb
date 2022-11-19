@@ -1,0 +1,72 @@
+<!--public/properties/new.html.erbとpublic/properties/edit.html.erbの部分テンプレート-->
+
+<tr>
+  <div class="form-group">
+    <th><%= f.label :所在地 %></th>
+    <td><%= f.text_field :location, size: "100*20", placeholder:"所在地" %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :価格 %></th>
+    <td><%= f.text_field :price, placeholder:"3980" %>万円</td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :物件画像 %></th>
+    <td><%= f.file_field :image, accept: 'image/*' %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :物件種別 %></th>
+    <td><%= f.collection_select :property_type_id, PropertyType.all, :id, :name ,:prompt => "--選択してください--" %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :間取り %></th>
+    <td><%= f.collection_select :floor_plan_id, FloorPlan.all, :id, :name ,:prompt => "--選択してください--" %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :物件メモ %></th>
+    <td><%= f.text_area :description, style: "height: 500px; width: 100%", placeholder:"ここに説明文を記述します。" %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :販売状況 %></th>
+    <!--keys.map {|k| [I18n.t("enums.property.sales_status.#{k}"), k]}   選択肢を１つ１つ取り出して、日本語に変換して並び替える-->
+    <td><%= f.select :sales_status, Property.sales_statuses.keys.map {|k| [I18n.t("enums.property.sales_status.#{k}"), k]}, class: 'sales_status-select' %></td>
+  </div>
+</tr>
+<!--ここからが星レビュー機能-->
+<tr>
+  <div class="form-group">
+    <th><%= f.label :評価 %></th>
+    <td>
+      <span id="star">
+        <%= f.hidden_field :star %>
+      </span>
+      <script>
+        // $('#star').empty();              #これがないとブラウザバックで星が増え続ける不具合が発生する。
+        // scoreName: 'property[star]',     #これがpropertyモデルのstarカラムへ値を保存という意味になる。
+        // half: false,                     #今回は５段階評価で⭐️半分評価は入力できないように設定する。
+        $('#star').empty();
+        $('#star').raty({
+          size     : 36,
+          starOff  : '<%= asset_path('star-off.png') %>',
+          starOn   : '<%= asset_path('star-on.png') %>',
+          scoreName: 'property[star]',
+          half: false,
+        });
+      </script>
+    </td>
+  </div>
+</tr>
+<!--ここまでが星レビュー機能-->
+
+

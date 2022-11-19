@@ -4,7 +4,7 @@ class Public::FavoritesController < ApplicationController
     @customer = current_customer
     # Favoriteモデルから、property_idを取得する。
     properties = Favorite.where(customer_id: @customer.id).pluck(:property_id)
-    @favorite_properties = Property.find(properties)
+    @favorite_properties = Property.where(id: properties).page(params[:page])
     # byebug
   
     # whereメソッド・・・与えられた条件にマッチするレコードを全て取得します。

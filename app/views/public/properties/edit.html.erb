@@ -10,50 +10,8 @@
   </div>
   <%= form_with model: @property, url: public_property_path(@property.id), method: :patch, local:true do |f| %>
     <table>
-      <tr>
-        <div class="form-group">
-          <th><%= f.label :所在地 %></th>
-          <td><%= f.text_field :location, size: "100*20", placeholder:"所在地" %></td>
-        </div>
-      </tr>
-      <tr>
-        <div class="form-group">
-          <th><%= f.label :価格 %></th>
-          <td><%= f.text_field :price, placeholder:"3980" %>万円</td>
-        </div>
-      </tr>
-      <tr>
-        <div class="form-group">
-          <th><%= f.label :物件画像 %></th>
-          <td><%= f.file_field :image, accept: 'image/*' %></td>
-        </div>
-      </tr>
-      <tr>
-        <div class="form-group">
-          <th><%= f.label :物件種別 %></th>
-          <td><%= f.collection_select :property_type_id, PropertyType.all, :id, :name ,:prompt => "--選択してください--" %></td>
-        </div>
-      </tr>
-      <tr>
-        <div class="form-group">
-          <th><%= f.label :間取り %></th>
-          <td><%= f.collection_select :floor_plan_id, FloorPlan.all, :id, :name ,:prompt => "--選択してください--" %></td>
-        </div>
-      </tr>
-      <tr>
-        <div class="form-group">
-          <th><%= f.label :物件メモ %></th>
-          <td><%= f.text_area :description, style: "height: 500px; width: 100%", placeholder:"ここに説明文を記述します" %></td>
-        </div>
-      </tr>
-      <tr>
-        <div class="form-group">
-          <th><%= f.label :販売状況 %></th>
-            <td>
-              <%= f.select :sales_status,Property.sales_statuses.keys.map {|k| [I18n.t("enums.property.sales_status.#{k}"), k]}, class: 'sales_status-select' %>
-            </td>
-        </div>
-      </tr>
+      <!--部分テンプレートの中"f."が使えるように、使いたい変数ｆを受け渡す。-->
+      <%= render 'info', f: f %>
       <tr>
         <div class="form-action">
           <td><%= f.submit "保存する", class:"btn btn-success" %></td>

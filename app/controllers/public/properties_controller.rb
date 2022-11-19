@@ -1,7 +1,10 @@
 class Public::PropertiesController < ApplicationController
 
   def index
-    @properties = Property.all
+    # ページネーション機能なしの場合は↓
+    # @properties = Property.all
+    # ページネーション機能をつける場合↓
+    @properties = Property.page(params[:page])
   end
 
   def new
