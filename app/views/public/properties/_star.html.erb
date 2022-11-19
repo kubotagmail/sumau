@@ -1,0 +1,18 @@
+<!--public/properties/index.html.erbとpublic/properties/show.html.erbで使っている部分テンプレート-->
+<!--レビュー機能-->
+<td class="align-middle font-weight-bold" id="star-rate<%= property.id %>">
+  <script>
+    //  $('#star-rate< %= @property.id %>').empty();  #これがないとブラウザバックで星が増え続ける不具合が発生する。
+    //  readOnly: true,                               #読み取り専用、編集できないようにする。
+    //  score: < %= @property.star %>,                #@property = Property.find(params[:id])のstarカラムを取り出す。
+    $('#star-rate<%= property.id %>').empty();
+    $('#star-rate<%= property.id%>').raty({
+      size      : 36,
+      starOff   : '<%= asset_path('star-off.png') %>',
+      starOn    : '<%= asset_path('star-on.png') %>',
+      half      : false,
+      readOnly  : true,
+      score     : <%= property.star %>,
+    });
+  </script>
+</td>
