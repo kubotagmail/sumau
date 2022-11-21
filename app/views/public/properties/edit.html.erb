@@ -15,7 +15,7 @@
       <tr>
         <div class="form-action">
           <td><%= f.submit "保存する", class:"btn btn-success" %></td>
-          <td width="100"><%= link_to "削除する", public_property_path(@property), method: :delete, class: 'btn btn-danger' %></td>
+          <td width="100"><%= link_to "削除する", public_property_path(@property), method: :delete, class: 'btn btn-danger', data: { confirm: "物件情報のデータが消えますがよろしいですか？" } %></td>
         </div>
       </tr>
     </table>

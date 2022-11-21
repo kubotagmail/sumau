@@ -16,7 +16,7 @@ class Public::PropertiesController < ApplicationController
     @property.customer_id = current_customer.id
     #byebug
     if @property.save
-       redirect_to public_properties_path
+       redirect_to public_properties_path, notice: '新規物件情報の登録が完了しました。'
     else
       @properties = Property.all
       render :new

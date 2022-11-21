@@ -72,7 +72,7 @@
         </div>
       </nav>
     </header>
-    
+
     <% if flash[:notice] %>
       <div class="notification is-info">
         <p class="notice"><%= notice %></p>
@@ -83,9 +83,24 @@
         <p class="alert"><%= alert %></p>
       </div>
     <% end %>
-    <%= yield %>
-
+    <main>
+      <%= yield %>
+    </main>
+    <!--フッター部分-->
     <footer>
+      <div class="bg-dark text-white pt-3 pb-3">
+        <div class="row">
+          <div class="mx-auto">
+            <h2>SUMAU</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mx-auto">
+          <%= link_to "管理者はこちら", new_admin_session_path %>
+        </div>
+      </div>
     </footer>
+    <!--フッターここまで-->
   </body>
 </html>
