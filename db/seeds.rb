@@ -10,6 +10,10 @@ Admin.create!(
    password: 'admin@admin'
 )
 
+
+FloorPlan.create!(
+  name: "その他"
+  )
 FloorPlan.create!(
   name: "ワンルーム(1R)"
   )
@@ -55,11 +59,11 @@ FloorPlan.create!(
 FloorPlan.create!(
   name: "4SLDK"
   )
-FloorPlan.create!(
-  name: "その他"
-  )
 
 
+PropertyType.create!(
+   name: "その他"
+   )
 PropertyType.create!(
    name: "新築一戸建て"
    )
@@ -72,12 +76,7 @@ PropertyType.create!(
 PropertyType.create!(
    name: "中古マンション"
    )
-PropertyType.create!(
-   name: "土地"
-   )
-PropertyType.create!(
-   name: "その他"
-   )
+
 
 
 

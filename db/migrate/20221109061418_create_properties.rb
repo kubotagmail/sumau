@@ -8,7 +8,7 @@ class CreateProperties < ActiveRecord::Migration[6.1]
       t.text :description, null: false
       t.integer :price, null: false
       t.integer :sales_status, null: false, default: 0
-      t.integer :star, null: false, default: 0
+      t.integer :star, null: true, default: 0
       t.timestamps
     end
   end
