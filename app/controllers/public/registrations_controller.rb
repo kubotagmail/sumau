@@ -7,7 +7,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
     flash[:notice] = '新規登録に成功しました。'
-    public_my_page_path 
+    public_my_page_path
   end
 
   protected
