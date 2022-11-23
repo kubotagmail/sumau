@@ -10,15 +10,21 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <style>
       header{
-        background-color: #494949;
+        background-color: #669933;
       }
     </style>
   </head>
 
   <body>
     <header class= "shadow">
-      <nav class= "navbar navbar-expand-lg" >
+      <nav class= "navbar navbar-expand-lg navbar-light" >
         <div class= "container" >
+          <a class="navbar-brand" href="/" style="color: #eee;"><h4>SUMAU</h4></a>
+          
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class= "navbar-nav ml-auto">
               <!--顧客用ヘッダー-->
@@ -83,11 +89,11 @@
         <p class="alert"><%= alert %></p>
       </div>
     <% end %>
-    
+
     <main>
       <%= yield %>
     </main>
-    
+
     <!--フッター部分-->
     <footer>
       <div class="container">

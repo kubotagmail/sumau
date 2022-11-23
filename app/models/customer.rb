@@ -8,9 +8,9 @@ class Customer < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
 
-   validates :last_name, presence: {message: "は、1文字以上で入力して下さい。"}
-   validates :first_name, presence: {message: "は、1文字以上で入力して下さい。"}
-   validates :postal_code, presence: :ture, format: {with:/\A\d{7}\z/, message: "は、半角数字で入力してください。"}
+  # validates :last_name, presence: {message: "は、1文字以上で入力して下さい。"}
+  # validates :first_name, presence: {message: "は、1文字以上で入力して下さい。"}
+  # validates :postal_code, presence: :ture, format: {with:/\A\d{7}\z/, message: "は、半角数字で入力してください。"}
 
 
   # 退会済みのユーザーが同じアカウントでログイン出来ないようにする

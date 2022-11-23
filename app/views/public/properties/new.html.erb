@@ -5,9 +5,11 @@
       <h2 class="px-3">物件情報新規登録</h2>
     </div>
   </div>
-  <!--info部分テンプレート呼び出し-->
+  <!--エラーメッセージの部分テンプレート-->
+  <%= render "public/shared/error_messages", obj: @property %>
   <%= form_with model: @property, url:public_properties_path, method: :post, local:true do |f| %>
     <table>
+      <!--info部分テンプレート呼び出し-->
       <!--部分テンプレートの中"f."が使えるように、使いたい変数ｆを受け渡す。-->
       <%= render 'info', f: f %>
       <tr>
