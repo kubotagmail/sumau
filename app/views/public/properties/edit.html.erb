@@ -8,6 +8,8 @@
       </div>
     </div>
   </div>
+  <!--エラーメッセージの部分テンプレート-->
+  <%= render "public/shared/error_messages", obj: @property %>
   <%= form_with model: @property, url: public_property_path(@property.id), method: :patch, local:true do |f| %>
     <table>
       <!--部分テンプレートの中"f."が使えるように、使いたい変数ｆを受け渡す。-->
