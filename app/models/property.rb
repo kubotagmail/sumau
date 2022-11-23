@@ -2,15 +2,15 @@ class Property < ApplicationRecord
   has_one_attached :image
   has_many :favorites, dependent: :destroy
 
-  belongs_to :customer
-  belongs_to :floor_plan
-  belongs_to :property_type
-
-  validates :property_type_id, presence: true
-  validates :floor_plan_id, presence: true
   validates :location, presence: {message: "は、1文字以上で入力して下さい。"}
-  validates :price, presence: :ture, format: {with:/\A\d{7}\z/, message: "は、半角数字で入力してください。"}
-
+  # validates :price, presence: true, format: {with:/\A[0-9]+\z/, message: "は、半角数字で入力してください。"}
+  validates :price, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9_999_999 },
+                  format: { with: /\A[0-9]+\z/ }
+  
+  
+  belongs_to :customer
+  belongs_to :property_type
+  belongs_to :floor_plan
 
   enum sales_status: { on_sale: 0, stop_selling: 1, with_application: 2, closed: 3 }
   # on_sale: 販売中 , stop_selling: 販売停止中, with_application: 申し込みあり, closed: 成約済み
