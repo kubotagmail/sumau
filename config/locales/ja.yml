@@ -31,10 +31,8 @@ ja:
         location: "所在地"
         price: "価格"
         sales_status: "販売状況"
-
-
-
-
+        
+          
   devise:
     confirmations:
       confirmed: 'アカウントを登録しました。'
@@ -102,3 +100,5 @@ ja:
       confirmation: "が内容とあっていません。"
       required: "を選択してください。"
       not_a_number: "は半角数字で入力してください。"
+ 
+

@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   root to: "public/homes#top"
 
   namespace :admin do
-    get '/home/top' => 'homes#top'
+    # admin側では会員一覧画面がトップ画面を兼ねる
+    get '/home/top' => 'customers#index'
+
     resources :floor_plans, only: [:index, :create, :edit, :update]
     resources :property_types, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
