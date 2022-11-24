@@ -1,5 +1,5 @@
 class Admin::FloorPlansController < ApplicationController
-
+  before_action :authenticate_admin!
   def index
     @floor_plan = FloorPlan.new
     @floor_plans = FloorPlan.all

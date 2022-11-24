@@ -1,5 +1,6 @@
 class Public::FavoritesController < ApplicationController
-
+  before_action :authenticate_customer!
+  
   def index
     @customer = current_customer
     # Favoriteモデルから、property_idを取得する。

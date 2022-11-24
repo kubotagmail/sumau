@@ -1,4 +1,5 @@
 class Public::PropertiesController < ApplicationController
+  before_action :authenticate_customer!
 
   def index
     # ページネーション機能なしの場合は↓
