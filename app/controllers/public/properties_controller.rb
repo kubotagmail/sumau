@@ -15,7 +15,7 @@ class Public::PropertiesController < ApplicationController
   def create
     @property = Property.new(property_params)
     @property.customer_id = current_customer.id
-    if @property.star == ""
+    if @property.star.nil? || @property.star == ""
       @property.star = 0
     end
     #byebug
@@ -37,6 +37,9 @@ class Public::PropertiesController < ApplicationController
 
   def update
     @property = Property.find(params[:id])
+    if params[:property][:star] || params[:property][:star] == ""
+      params[:property][:star] = 0
+    end
     if @property.update(property_params)
       redirect_to public_property_path(@property)
     else
