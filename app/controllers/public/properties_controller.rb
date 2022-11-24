@@ -15,6 +15,9 @@ class Public::PropertiesController < ApplicationController
   def create
     @property = Property.new(property_params)
     @property.customer_id = current_customer.id
+    if @property.star == ""
+      @property.star = 0
+    end
     #byebug
     if @property.save
        redirect_to public_properties_path, notice: '新規物件情報の登録が完了しました。'
