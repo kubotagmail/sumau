@@ -37,7 +37,7 @@ class Public::PropertiesController < ApplicationController
 
   def update
     @property = Property.find(params[:id])
-    if params[:property][:star] || params[:property][:star] == ""
+    if params[:property][:star].nil? || params[:property][:star] == ""
       params[:property][:star] = 0
     end
     if @property.update(property_params)
