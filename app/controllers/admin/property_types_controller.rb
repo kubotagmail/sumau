@@ -1,5 +1,5 @@
 class Admin::PropertyTypesController < ApplicationController
-
+  before_action :authenticate_admin!
   def index
     @property_type = PropertyType.new
     @property_types = PropertyType.all
