@@ -15,6 +15,7 @@ class Public::PropertiesController < ApplicationController
   def create
     @property = Property.new(property_params)
     @property.customer_id = current_customer.id
+    # スターが存在しないか、もしくは空文字列の時は、０。この記述がないと本番環境下でエラーが生じる。
     if @property.star.nil? || @property.star == ""
       @property.star = 0
     end
@@ -37,6 +38,7 @@ class Public::PropertiesController < ApplicationController
 
   def update
     @property = Property.find(params[:id])
+    # updateなのでparamsを使用
     if params[:property][:star].nil? || params[:property][:star] == ""
       params[:property][:star] = 0
     end

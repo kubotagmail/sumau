@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     get '/customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     patch '/customers/withdraw' => 'customers#withdraw', as: 'withdraw'
 
-      get 'properties/favorites' => 'favorites#index', as: 'favorites'
+    get 'properties/favorites' => 'favorites#index', as: 'favorites'
 
     resources :properties do
       resource :favorite, only: [:create, :destroy]

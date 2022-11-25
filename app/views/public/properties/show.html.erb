@@ -1,17 +1,22 @@
 <!--会員側 物件詳細画面-->
 <p id="notice"></p>
-<div class="container mt-5 mb-5">
+<div class="container">
   <div class="row ml-3 mb-3">
     <h2 class="px-3">物件詳細</h2>
   </div>
-  <div class="row text-center text-xs-center text-sm-left text-md-left ">
-    <div class="col-5">
+  <div class="row">
+    <div class="mx-auto">
+    <!--ブックマークボタン部分テンプレート呼び出し-->
+    <h2 class="px-3"><%= @property.location %><%= render 'public/favorites/favorite-btn', property: @property %></h2>
       <%= image_tag @property.get_image(400,400) %>
     </div>
-    <div class="col-7 item-details mx-auto">
-      <table>
-        <!--ブックマークボタン部分テンプレート呼び出し-->
-        <tr><h2><%= render 'public/favorites/favorite-btn', property: @property %></h2></tr>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+      <table class="table table-bordered">
         <tr>
           <td width="100">物件種別</td>
           <td><%= @property.property_type.name %></td>
@@ -52,24 +57,22 @@
         <!--  </td>-->
           <!--<td><%#= render 'public/favorites/favorite-btn', property: @property %></td>-->
         <!--</tr>-->
-        
+
         <tr>
           <td>評価</td>
           <!--星レビュー部分テンプレート呼び出し-->
-          <%= render 'star', property: @property %> 
+          <%= render 'star', property: @property %>
         </tr>
-  
+
         <tr height="20">
           <td>物件メモ</td>
           <!--< %= simple_format(@property.description) %>simple_formatで改行を反映させる-->
           <td><%= simple_format(@property.description) %></td>
         </tr>
-
-        <tr height="500">
-          <td></td>
-          <td><%= link_to "編集する", edit_public_property_path, class:"btn btn-success" %></td>
-        </tr>
-      <table>
+      </table>
+      <div class="text-center">
+        <%= link_to "編集する", edit_public_property_path, class:"btn btn-success" %>
+      </div>
     </div>
   </div>
 </div>
