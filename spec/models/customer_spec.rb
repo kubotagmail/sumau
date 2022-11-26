@@ -63,7 +63,9 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
     context 'last_nameカラム' do
       it '姓が空欄でないこと' do
         customer.last_name = ''
-        is_expected.to.eq  false
+        #customer.valid?
+        #expect(customer.errors[:last_name].join).to include("文字以上")
+        is_expected.to eq  false
       end
       it '姓が1文字以上であること: 0文字は×' do
         customer.last_name = Faker::Lorem.characters(number: 0)
@@ -108,7 +110,7 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
         is_expected.to eq true
       end
     end
-    
+
   end
 
   describe 'アソシエーションのテスト' do
