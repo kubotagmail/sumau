@@ -43,6 +43,9 @@ Rails.application.routes.draw do
     patch '/customers/withdraw' => 'customers#withdraw', as: 'withdraw'
 
     get 'properties/favorites' => 'favorites#index', as: 'favorites'
+    
+
+
 
     resources :properties do
       resource :favorite, only: [:create, :destroy]

@@ -1,6 +1,12 @@
 class Property < ApplicationRecord
   has_one_attached :image
   has_many :favorites, dependent: :destroy
+  
+  # 位置情報用
+  geocoded_by :location
+  after_validation :geocode, if: :location_changed?
+  # ここで記述終わり
+  
 
   validates :location, presence: {message: "は、1文字以上で入力して下さい。"}
   # validates :price, presence: true, format: {with:/\A[0-9]+\z/, message: "は、半角数字で入力してください。"}

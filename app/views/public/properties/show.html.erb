@@ -13,9 +13,9 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="mx-auto">
+    <div class="col-md-5">
       <table class="table table-bordered">
         <tr>
           <td width="100">物件種別</td>
@@ -74,5 +74,90 @@
         <%= link_to "編集する", edit_public_property_path, class:"btn btn-success" %>
       </div>
     </div>
+    <!--ここから右側部分-->
+    <!--
+    ●地図機能の実装、参考ドキュメント
+    ・https://qiita.com/nagase_toya/items/e49977efb686ed05eadb
+    ・https://qiita.com/Sasaki_51660skbb/items/629a7f78e118e3bac1bc
+    -->
+    
+    <!--地図機能ここから-->
+    <div class="col-md-7 ">
+    <!--Googleマップ検索フォームここから追加-->
+    <input id="address" type="textbox" value="<%= @property.location %>">
+
+    <input type="button" value="検索" onclick="codeAddress()">
+    <div id="display"></div>
+    <!--Googleマップ検索フォームはここまで-->
+
+    <!--地図機能再びここから-->
+    <script type="text/javascript">
+      var map
+      function initMap() {
+        geocoder = new google.maps.Geocoder()
+    // #latitude,longitudeから位置を特定
+        var test ={lat: <%= @property.latitude %>, lng: <%= @property.longitude %>};
+        map = new google.maps.Map(document.getElementById('map'), {
+                  center: test,
+                  zoom: 15,
+                  });
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
+
+        var contentString = '住所：<%= @property.location %>';
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+    // Map上の指定した位置にピンを挿して表示する
+        var marker = new google.maps.Marker({
+                      position: test,
+                      map: map,
+                      title: contentString
+                     });
+
+         marker.addListener('click', function() {
+           infowindow.open(map, marker);
+         });
+      }
+
+         function codeAddress(){
+          let inputAddress = document.getElementById('address').value;
+
+          geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+            if (status == 'OK') {
+              map.setCenter(results[0].geometry.location);
+              var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location
+              });
+              // 下の1行を追加
+              display.textContent = "検索結果：" + results[ 0 ].geometry.location
+            } else {
+              alert('該当する結果がありませんでした：' + status);
+            }
+          });
+        }
+    </script>
+
+    <!--以下の記述の中にあるYOUR_API_KEYには取得したご自身のAPIキーを記述してください-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLEMAP"] %>&callback=initMap" async defer>
+    </script>
+    <!--表示するmapのcssです。ご自身でカスタマイズしてください。高さが設定されていないと表示されないことがあります。-->
+    <style type="text/css">
+      #map { height: 600px;
+             width: 600;}
+    </style>
+
+    <!--mapの表示-->
+    <div id="map"></div>
+    <!--地図機能ここまで-->
+
+    </div>
+    <!--右側部分ここまで-->
   </div>
 </div>
+
+
+
+
