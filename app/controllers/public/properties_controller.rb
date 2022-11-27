@@ -15,6 +15,10 @@ class Public::PropertiesController < ApplicationController
   def create
     @property = Property.new(property_params)
     @property.customer_id = current_customer.id
+    # スターが存在しないか、もしくは空文字列の時は、０。この記述がないと本番環境下でエラーが生じる。
+    if @property.star.nil? || @property.star == ""
+      @property.star = 0
+    end
     #byebug
     if @property.save
        redirect_to public_properties_path, notice: '新規物件情報の登録が完了しました。'
@@ -34,6 +38,10 @@ class Public::PropertiesController < ApplicationController
 
   def update
     @property = Property.find(params[:id])
+    # updateなのでparamsを使用
+    if params[:property][:star].nil? || params[:property][:star] == ""
+      params[:property][:star] = 0
+    end
     if @property.update(property_params)
       redirect_to public_property_path(@property)
     else
@@ -51,7 +59,9 @@ class Public::PropertiesController < ApplicationController
   private
 
   def  property_params
-    params.require(:property).permit(:customer_id, :floor_plan_id, :property_type_id, :image, :location, :description, :price, :sales_status, :star)
+    params.require(:property).permit(:customer_id, :floor_plan_id, :property_type_id, :image, :location, :description,
+                                     :price, :sales_status, :star, :latitude, :longitude, :name, images: [])
+                                    #複数投稿の場合 , images: []
   end
 
 end

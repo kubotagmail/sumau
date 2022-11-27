@@ -1,11 +1,11 @@
 class Customer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  
+
   has_many :properties, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
@@ -19,6 +19,7 @@ class Customer < ApplicationRecord
   def  active_for_authentication?
     super && (is_deleted == false)
   end
+
 
   # ゲストログイン用に作成した
   def self.guest
