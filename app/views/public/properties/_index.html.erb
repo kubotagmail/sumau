@@ -3,14 +3,15 @@
   <table class="table">
     <thead class= "table-secondary">
       <tr>
-        <th style="width: 13%">物件種別</th>
+        <th style="width: 11%">物件種別</th>
         <th style="width: 11%">価格</th>
-        <th>所在地</th>
-        <th style="width: 12%">間取り</th>
-        <th style="width: 12%">販売状況</th>
+        <th style="width: 32%">住所</th>
+        <th style="width: 13%">(建物名)</th>
+        <th style="width: 8%">間取り</th>
+        <th style="width: 7%">販売<br>状況</th>
         <th style="width: 16%">評価</th>
-        <th></th>
-        <th style="width: 10%"></th>
+        <th style="width: 1%"></th>
+        <th style="width: 1%"></th>
       </tr>
     </thead>
     <% properties.each do |property| %>
@@ -19,6 +20,7 @@
           <td class="align-middle"><%= property.property_type.name %></td>
           <td class="align-middle"><%= property.price.to_s(:delimited) %>万円</td>
           <td class="align-middle"><%= property.location %></td>
+          <td class="align-middle"><%= property.name %></td>
           <td class="align-middle"><%= property.floor_plan.name %></td>
           <% if property.sales_status == 'on_sale' %>
             <td class="align-middle text-success font-weight-bold"><%= property.sales_status_i18n %></td>
@@ -37,7 +39,7 @@
             <%= render 'public/favorites/favorite-btn', property: property %>
           </td>
           <td class="align-middle">
-            <%= link_to "詳細を見る", public_property_path(property.id) %>
+            <%= link_to "詳細", public_property_path(property.id) %>
           </td>
         </tr>
       </tbody>

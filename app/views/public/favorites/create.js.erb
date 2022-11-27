@@ -1,0 +1,4 @@
+<!--$('#favorite_btn_<%#= @property.id %>').html("<%#= j(render "favorites/favorite-btn", property: @property) %>");-->
+$('#favorite_buttons_<%= @property.id %>').html("<%= escape_javascript(render partial: 'public/favorites/favorite-btn', locals: {property: @property}) %>");
+
+<!--escape_javascript・・・ JavaScriptファイル内にHTMLを挿入するときに実行結果をエスケープ(別の文字列に置き換える)するために必要-->

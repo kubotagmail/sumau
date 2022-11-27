@@ -2,8 +2,14 @@
 
 <tr>
   <div class="form-group">
-    <th><%= f.label :所在地 %></th>
-    <td><%= f.text_field :location, size: "100*20", placeholder:"所在地" %></td>
+    <th><%= f.label :住所 %></th>
+    <td><%= f.text_field :location, size: "100*20", placeholder:"住所" %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :建物名 %></th>
+    <td><%= f.text_field :name, size: "100*20", placeholder:"建物名 ◯◯号室" %></td>
   </div>
 </tr>
 <tr>
@@ -16,6 +22,8 @@
   <div class="form-group">
     <th><%= f.label :物件画像 %></th>
     <td><%= f.file_field :image, accept: 'image/*' %></td>
+    <!--<th><%#= f.label :images,  '物件画像' %></th>-->
+    <!--<td><%#= f.file_field :images, accept: 'image/*', multiple: true %></td>-->
   </div>
 </tr>
 <tr>

@@ -1,5 +1,8 @@
 class Property < ApplicationRecord
   has_one_attached :image
+  # 画像の複数投稿の場合↓
+  # has_many_attached :images
+  
   has_many :favorites, dependent: :destroy
   
   # 位置情報用
@@ -35,6 +38,8 @@ class Property < ApplicationRecord
     end
       image.variant(resize_to_limit: [width, height]).processed
   end
+  
+
 
   # 検索方法分岐
   # whereメソッドを使いデータベースから該当データを取得し、変数に代入する。

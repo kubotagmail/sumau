@@ -7,13 +7,18 @@
   <div class="row">
     <div class="mx-auto">
     <!--ブックマークボタン部分テンプレート呼び出し-->
-    <h2 class="px-3"><%= @property.location %><%= render 'public/favorites/favorite-btn', property: @property %></h2>
+    <h2 class="px-3"><%= @property.location %><%= @property.name %><%= render 'public/favorites/favorite-btn', property: @property %></h2>
       <%= image_tag @property.get_image(400,400) %>
+
+      <!--画像の複数投稿-->
+    <%# @property.images.each do |image| %>
+      <%#= image_tag(image, width:400, height:400) %>
+    <%# end %>
     </div>
   </div>
 </div>
 
-<div class="container px-5 px-sm-0">
+<div class="container mt-5 px-5 px-sm-0">
   <div class="row">
     <div class="col-md-5">
       <table class="table table-bordered">
@@ -28,7 +33,7 @@
         </tr>
 
         <tr height="20">
-          <td>所在地</td>
+          <td>住所</td>
           <td><%= @property.location %></td>
         </tr>
 
@@ -80,7 +85,7 @@
     ・https://qiita.com/nagase_toya/items/e49977efb686ed05eadb
     ・https://qiita.com/Sasaki_51660skbb/items/629a7f78e118e3bac1bc
     -->
-    
+
     <!--地図機能ここから-->
     <div class="col-md-7 ">
     <!--Googleマップ検索フォームここから追加-->
@@ -99,7 +104,7 @@
         var test ={lat: <%= @property.latitude %>, lng: <%= @property.longitude %>};
         map = new google.maps.Map(document.getElementById('map'), {
                   center: test,
-                  zoom: 15,
+                  zoom: 18,
                   });
         var transitLayer = new google.maps.TransitLayer();
         transitLayer.setMap(map);

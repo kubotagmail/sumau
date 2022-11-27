@@ -11,6 +11,7 @@ class CreateProperties < ActiveRecord::Migration[6.1]
       t.integer :star, null: true, default: 0
       t.float :latitude
       t.float :longitude
+      t.string :name
       t.timestamps
     end
   end
