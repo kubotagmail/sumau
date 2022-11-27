@@ -38,6 +38,11 @@
         </tr>
 
         <tr height="20">
+          <td>建物名</td>
+          <td><%= @property.name %></td>
+        </tr>
+
+        <tr height="20">
           <td>間取り</td>
           <td><%=@property.floor_plan.name %></td>
         </tr>
@@ -97,11 +102,18 @@
 
     <!--地図機能再びここから-->
     <script type="text/javascript">
+      // var で宣言
       var map
       function initMap() {
         geocoder = new google.maps.Geocoder()
-    // #latitude,longitudeから位置を特定
-        var test ={lat: <%= @property.latitude %>, lng: <%= @property.longitude %>};
+        // #latitude,longitudeから位置を特定
+        // もし@property.latitudeがnilまたは@property.longitudeがnilだった場合var test = {lat: 35.6938253, lng: 139.7033559};
+        <% if @property.latitude == nil || @property.longitude == nil %>
+          var test = {lat: 35.6938253, lng: 139.7033559};
+        <% else %>
+          var test ={lat: <%= @property.latitude %>, lng: <%= @property.longitude %>};
+        <% end %>
+
         map = new google.maps.Map(document.getElementById('map'), {
                   center: test,
                   zoom: 18,
