@@ -79,3 +79,5 @@ gem "net-pop"
 gem "net-imap"
 
 gem 'rename'
+
+gem "geocoder"

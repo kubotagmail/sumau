@@ -11,13 +11,6 @@
 
     <!--インデックスの部分テンプレート呼び出し-->
     <%= render 'public/properties/index', properties: @favorite_properties %>
-    <!--ページネーション機能-->
-    <div class="row">
-      <div class="mx-auto">
-        <p><%= paginate @favorite_properties %></p>
-      </div>
-    </div>
-    <!--ページネーションここで終わり-->
   <% else %>
     <h4>ブックマークに追加した物件はありません。<br>ブックマークへ追加したい場合は、物件一覧画面、または物件詳細画面の「 <i class="far fa-bookmark"></i> 」を押して登録してください。</h4>
   <% end %>

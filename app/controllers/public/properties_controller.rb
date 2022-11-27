@@ -59,7 +59,9 @@ class Public::PropertiesController < ApplicationController
   private
 
   def  property_params
-    params.require(:property).permit(:customer_id, :floor_plan_id, :property_type_id, :image, :location, :description, :price, :sales_status, :star)
+    params.require(:property).permit(:customer_id, :floor_plan_id, :property_type_id, :image, :location, :description,
+                                     :price, :sales_status, :star, :latitude, :longitude, :name, images: [])
+                                    #複数投稿の場合 , images: []
   end
 
 end
