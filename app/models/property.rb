@@ -1,22 +1,22 @@
 class Property < ApplicationRecord
-  has_one_attached :image
+  # has_one_attached :image
   # 画像の複数投稿の場合↓
-  # has_many_attached :images
-  
+  has_many_attached :images
+
   has_many :favorites, dependent: :destroy
-  
+
   # 位置情報用
   geocoded_by :location
   after_validation :geocode, if: :location_changed?
   # ここで記述終わり
-  
+
 
   validates :location, presence: {message: "は、1文字以上で入力して下さい。"}
   # validates :price, presence: true, format: {with:/\A[0-9]+\z/, message: "は、半角数字で入力してください。"}
   validates :price, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9_999_999 },
                   format: { with: /\A[0-9]+\z/ }
-  
-  
+
+
   belongs_to :customer
   belongs_to :property_type
   belongs_to :floor_plan
@@ -29,16 +29,19 @@ class Property < ApplicationRecord
     favorites.where(customer_id: customer.id).exists?
   end
 
+  # 画像を一つだけ投稿するときの場合の記述。
   # もし写真を持っていなかったらunless、持ってたらその写真を表示
-  def get_image(width, height)
-    unless image.attached?
-      # binding.pry
-      file_path = Rails.root.join('app/assets/images/no_image.jpg')
-      image.attach(io: File.open(file_path), filename: 'no_image.jpg', content_type: 'image/jpg')
-    end
-      image.variant(resize_to_limit: [width, height]).processed
-  end
-  
+  # def get_image(width, height)
+  #   unless image.attached?
+  #     # binding.pry
+  #     file_path = Rails.root.join('app/assets/images/no_image.jpg')
+  #     image.attach(io: File.open(file_path), filename: 'no_image.jpg', content_type: 'image/jpg')
+  #   end
+  #     image.variant(resize_to_limit: [width, height]).processed
+  # end
+
+  # 画像を複数投稿する時は、get_imageは使わない。
+
 
 
   # 検索方法分岐

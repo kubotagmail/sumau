@@ -18,14 +18,46 @@
     <td><%= f.text_field :price, placeholder:"3980" %>万円</td>
   </div>
 </tr>
+
+<!--画像ひとつだけ登録できるシステムの場合-->
+<!--<tr>-->
+<!--  <div class="form-group">-->
+    <!--<th><%#= f.label :物件画像 %></th>-->
+    <!--<td><%#= f.file_field :image, accept: 'image/*' %></td>-->
+<!--  </div>-->
+<!--</tr>-->
+
+<!--画像の複数登録-->
+<!--参考
+・https://magazine.techacademy.jp/magazine/29917#sec3
+・https://qiita.com/me-654393/items/3b259bbc70f62898bd6f
+・each文で取得する回数の制限 https://qiita.com/bon_eng/items/b44d10b6f3fb86b2ba27-->
+<!--
+画像の表示は<%#= image_tag image, width:50, height:50 %>
+画像のファイル名の表示は<%#= image.filename %>-->
+<%# property.images.each do |image| %>
+  <%#= image.filename %>
+<%# end %>
 <tr>
   <div class="form-group">
-    <th><%= f.label :物件画像 %></th>
-    <td><%= f.file_field :image, accept: 'image/*' %></td>
-    <!--<th><%#= f.label :images,  '物件画像' %></th>-->
-    <!--<td><%#= f.file_field :images, accept: 'image/*', multiple: true %></td>-->
+    <th><%= f.label :images, '物件画像1' %></th>
+    <td><%= f.file_field :images, accept: 'image/*', multiple: true %></td>
   </div>
 </tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :images, '物件画像2' %></th>
+    <td><%= f.file_field :images, accept: 'image/*', multiple: true %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :images, '物件画像3' %></th>
+    <td><%= f.file_field :images, accept: 'image/*', multiple: true %></td>
+  </div>
+</tr>
+<!--画像の複数登録の記述ここまで-->
+
 <tr>
   <div class="form-group">
     <th><%= f.label :物件種別 %></th>
@@ -51,6 +83,7 @@
     <td><%= f.select :sales_status, Property.sales_statuses.keys.map {|k| [I18n.t("enums.property.sales_status.#{k}"), k]}, class: 'sales_status-select' %></td>
   </div>
 </tr>
+
 <!--ここからが星レビュー機能-->
 <tr>
   <div class="form-group">

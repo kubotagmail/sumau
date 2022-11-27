@@ -1,19 +1,29 @@
 <!--会員側 物件詳細画面-->
-<p id="notice"></p>
-<div class="container">
+<div class="container mt-5">
   <div class="row ml-3 mb-3">
     <h2 class="px-3">物件詳細</h2>
   </div>
   <div class="row">
     <div class="mx-auto">
-    <!--ブックマークボタン部分テンプレート呼び出し-->
-    <h2 class="px-3"><%= @property.location %><%= @property.name %><%= render 'public/favorites/favorite-btn', property: @property %></h2>
-      <%= image_tag @property.get_image(400,400) %>
+      <!--ブックマークボタン部分テンプレート呼び出し-->
+      <h2 class="px-3"><%= @property.location %><%= @property.name %><%= render 'public/favorites/favorite-btn', property: @property %></h2>
 
-      <!--画像の複数投稿-->
-    <%# @property.images.each do |image| %>
-      <%#= image_tag(image, width:400, height:400) %>
-    <%# end %>
+      <!--画像を一つだけしか投稿できないような設定の場合の記述-->
+      <%#= image_tag @property.get_image(400,400) %>
+
+      <div class="text-center">
+        <!--画像の複数表示機能-->
+        <!--もし@property.imagesがattachedされていたら、その画像を表示-->
+        <% if @property.images.attached? %>
+          <% @property.images.each do |image| %>
+            <%= image_tag image, size: "300x300" %>
+          <% end %>
+        <% else %>
+          <%= image_tag "no_image.jpg", size: "300x300" %>
+        <% end %>
+      </div>
+      <!--画像の表示ここまで-->
+
     </div>
   </div>
 </div>
