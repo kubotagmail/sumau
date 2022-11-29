@@ -2,51 +2,9 @@
 <div class="container mt-5">
   <div class="row">
     <h2 class="px-3">物件一覧</h2>
-    <div class='col-md-14 offset-md-4'>
-      <!--検索用の部分テンプレート呼び出し-->
-      <%= render 'searches/search' %>
-    </div>
+    <!--検索用の部分テンプレート呼び出し-->
+    <%= render 'searches/search' %>
   </div>
-  <div class="search_form">
-    <table class="table">
-      <thead class= "table-secondary">
-        <tr>
-          <th>物件種別</th>
-          <th>価格</th>
-          <th>所在地</th>
-          <th>間取り</th>
-          <th>販売状況</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <% @properties.each do |property| %>
-        <tbody>
-          <tr>
-            <td class="align-middle"><%= property.property_type.name %></td>
-            <td class="align-middle"><%= property.price.to_s(:delimited) %>万円</td>
-            <td class="align-middle"><%= property.location %></td>
-            <td class="align-middle"><%= property.floor_plan.name %></td>
-            <% if property.sales_status == 'on_sale' %>
-              <td class="align-middle text-success font-weight-bold"><%= property.sales_status_i18n %></td>
-            <% elsif property.sales_status == 'stop_selling' %>
-              <td class="align-middle text-danger font-weight-bold"><%= property.sales_status_i18n %></td>
-            <% elsif property.sales_status == 'with_application' %>
-              <td class="align-middle font-weight-bold"><%= property.sales_status_i18n %></td>
-            <% else %>
-              <td class="align-middle font-weight-bold"><%= property.sales_status_i18n %></td>
-            <% end %>
-
-            <td class="align-middle">
-              <!--ブックマーク機能の部分テンプレート呼び出し-->
-              <%= render 'public/favorites/favorite-btn', property: property %>
-            </td>
-            <td class="align-middle">
-              <%= link_to "詳細を見る", public_property_path(property.id) %>
-            </td>
-          </tr>
-        </tbody>
-      <% end %>
-    </table>
-  </div>
+  <!--インデックスの部分テンプレート呼び出し-->
+  <%= render 'public/properties/index', properties: @properties %>
 </div>

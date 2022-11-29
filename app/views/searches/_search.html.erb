@@ -1,10 +1,13 @@
 <!--物件検索用の部分テンプレート-->
-<% if customer_signed_in? %>
-  <div class="search_form">
-    <%= form_with url: search_path, local: true, method: :get do |f| %>
-      <%= f.text_field :word, placeholder:"検索" %>
-      <%= f.select :search, options_for_select([["物件種別","property_type",], ["所在地","location"],  ["間取り","floor_plan"]]) %>
-      <%= f.submit "検索", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-<% end %>
+<div class='col-md-14 offset-md-6'>
+  <% if customer_signed_in? %>
+    <div class="search_form">
+      <%= form_with url: search_path, local: true, method: :get do |f| %>
+        <%= f.text_field :word, placeholder:"検索" %>
+        <%= f.select :search, options_for_select([["物件種別","property_type",], ["住所","location"],  ["間取り","floor_plan"]]) %>
+        <%= f.submit "検索", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  <% else %>
+  <% end %>
+</div>

@@ -93,6 +93,10 @@ ActiveRecord::Schema.define(version: 2022_11_12_132448) do
     t.text "description", null: false
     t.integer "price", null: false
     t.integer "sales_status", default: 0, null: false
+    t.integer "star", default: 0
+    t.float "latitude"
+    t.float "longitude"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

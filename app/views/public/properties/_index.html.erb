@@ -1,0 +1,58 @@
+<!--物件一覧の部分テンプレート-->
+<div class="search_form">
+  <table class="table">
+    <thead class= "table-secondary">
+      <tr>
+        <th style="width: 11%">物件種別</th>
+        <th style="width: 11%">価格</th>
+        <th style="width: 32%">住所</th>
+        <th style="width: 13%">(建物名)</th>
+        <th style="width: 8%">間取り</th>
+        <th style="width: 7%">販売<br>状況</th>
+        <th style="width: 16%">評価</th>
+        <th style="width: 1%"></th>
+        <th style="width: 1%"></th>
+      </tr>
+    </thead>
+    <% properties.each do |property| %>
+      <tbody>
+        <tr>
+          <td class="align-middle"><%= property.property_type.name %></td>
+          <td class="align-middle"><%= property.price.to_s(:delimited) %>万円</td>
+          <td class="align-middle"><%= property.location %></td>
+          <td class="align-middle"><%= property.name %></td>
+          <td class="align-middle"><%= property.floor_plan.name %></td>
+          <% if property.sales_status == 'on_sale' %>
+            <td class="align-middle text-success font-weight-bold"><%= property.sales_status_i18n %></td>
+          <% elsif property.sales_status == 'stop_selling' %>
+            <td class="align-middle text-danger font-weight-bold"><%= property.sales_status_i18n %></td>
+          <% elsif property.sales_status == 'with_application' %>
+            <td class="align-middle font-weight-bold"><%= property.sales_status_i18n %></td>
+          <% else %>
+            <td class="align-middle font-weight-bold"><%= property.sales_status_i18n %></td>
+          <% end %>
+          <!--星レビュー部分テンプレート呼び出し-->
+          <%= render 'public/properties/star', property: property %>
+
+          <td class="align-middle">
+            <!--ブックマーク機能の部分テンプレート呼び出し-->
+            <%= render 'public/favorites/favorite-btn', property: property %>
+          </td>
+          <td class="align-middle">
+            <%= link_to "詳細", public_property_path(property.id) %>
+          </td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+</div>
+
+<!--ページネーション機能-->
+<div class="container mt-5">
+  <div class="row">
+    <div class="mx-auto">
+      <p><%= paginate properties %></p>
+    </div>
+  </div>
+</div>
+<!--ページネーションここで終わり-->

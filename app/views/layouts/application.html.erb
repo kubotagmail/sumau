@@ -6,19 +6,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
     <style>
       header{
-        background-color: #494949;
+        background-color: #669933;
       }
     </style>
   </head>
 
   <body>
     <header class= "shadow">
-      <nav class= "navbar navbar-expand-lg" >
+      <nav class= "navbar navbar-expand-lg navbar-light" >
         <div class= "container" >
+          <a class="navbar-brand" href="/" style="color: #eee;"><h4>SUMAU</h4></a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class= "navbar-nav ml-auto">
               <!--顧客用ヘッダー-->
@@ -72,11 +78,35 @@
         </div>
       </nav>
     </header>
-    <%= yield %>
 
+    <% if flash[:notice] %>
+      <div class="notification is-info">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="notification is-danger">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <!--フッター部分-->
     <footer>
+      <div class="container">
+        <div class="small text-center text-muted" style="margin: 50px 0;">
+          <h2>SUMAU</h2>
+          <% if customer_signed_in? %>
+          <% elsif admin_signed_in? %>
+          <% else %>
+            <h6><%= link_to "管理者はこちら", new_admin_session_path %></h6>
+          <% end %>
+        </div>
+      </div>
     </footer>
-
+    <!--フッターここまで-->
   </body>
-
 </html>

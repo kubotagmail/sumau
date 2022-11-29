@@ -12,9 +12,12 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  # ゲストログイン用
+  # デバイスとしてcustomerを読み込む。
   devise_scope :customer do
+    # ゲストログイン用
     post 'public/customers/guest_sign_in', to: 'public/sessions#guest_sign_in'
+    # 新規登録画面のエラーメッセージ表示後のリロード時にエラーが起こる問題を解決
+    get '/customers' => 'public/registrations#new'
   end
 
   # 検索用
@@ -23,11 +26,14 @@ Rails.application.routes.draw do
   root to: "public/homes#top"
 
   namespace :admin do
-    get '/home/top' => 'homes#top'
+    # admin側では会員一覧画面がトップ画面を兼ねる
+    get '/home/top' => 'customers#index'
+
     resources :floor_plans, only: [:index, :create, :edit, :update]
     resources :property_types, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
   end
+
 
   namespace :public do
     get '/customers/my_page' => 'customers#show', as: 'my_page'
@@ -36,7 +42,10 @@ Rails.application.routes.draw do
     get '/customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     patch '/customers/withdraw' => 'customers#withdraw', as: 'withdraw'
 
-      get 'properties/favorites' => 'favorites#index', as: 'favorites'
+    get 'properties/favorites' => 'favorites#index', as: 'favorites'
+    
+
+
 
     resources :properties do
       resource :favorite, only: [:create, :destroy]

@@ -6,6 +6,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_up_path_for(resource)
+    flash[:notice] = '新規登録に成功しました。'
     public_my_page_path
   end
 

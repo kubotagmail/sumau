@@ -1,17 +1,25 @@
 class Customer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
 
   has_many :properties, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
 
+  validates :last_name, presence: {message: "は、1文字以上で入力して下さい。"}
+  validates :first_name, presence: {message: "は、1文字以上で入力して下さい。"}
+  validates :postal_code, presence: :ture, format: {with: /\A[0-9]+\z/, message: "は、半角数字で入力してください。"}
+
+
   # 退会済みのユーザーが同じアカウントでログイン出来ないようにする
-  # def  active_for_authentication?
-  #   super && (is_deleted == false)
-  # end
+  def  active_for_authentication?
+    super && (is_deleted == false)
+  end
+
 
   # ゲストログイン用に作成した
   def self.guest

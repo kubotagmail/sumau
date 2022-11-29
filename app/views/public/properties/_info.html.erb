@@ -1,0 +1,182 @@
+<!--public/properties/new.html.erbとpublic/properties/edit.html.erbの部分テンプレート-->
+
+<tr>
+  <div class="form-group">
+    <th><%= f.label :住所 %></th>
+    <td><%= f.text_field :location, size: "100*20", placeholder:"住所" %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :建物名 %></th>
+    <td><%= f.text_field :name, size: "100*20", placeholder:"建物名 ◯◯号室" %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :価格 %></th>
+    <td><%= f.text_field :price, placeholder:"3980" %>万円</td>
+  </div>
+</tr>
+
+
+
+<!--画像の複数登録-->
+
+<!--参考
+・https://magazine.techacademy.jp/magazine/29917#sec3
+・https://qiita.com/me-654393/items/3b259bbc70f62898bd6f
+  画像のプレビュー表示
+・https://qiita.com/parkon_hhs/items/b8d7f33294ccbce88d93
+・https://qiita.com/mattan5271/items/34276fce924aded4061a
+・https://qiita.com/kouichi_s/items/1858eb61790ceec843df
+・each文で取得する回数の制限 https://qiita.com/bon_eng/items/b44d10b6f3fb86b2ba27
+-->
+
+<!--
+画像の表示は<%#= image_tag image, width:50, height:50 %>
+画像のファイル名の表示は<%#= image.filename %>
+-->
+
+<%# property.images.each do |image| %>
+  <%#= image.filename %>
+<%# end %>
+
+<!--物件画像1-->
+<tr>
+  <div class="form-group">
+    <th><%= f.label :images, '物件画像1' %></th>
+    <td><%= f.file_field :images, accept: 'image/*', multiple: true, id: "img_1" %></td>
+  </div>
+</tr>
+<tr>
+    <th></th>
+    <td><span id="img_file_name_1">ファイルの名前</span></td>
+</tr>
+<tr>
+    <th></th>
+    <td><img id="preview_1" style="width:15%;"></td>
+    <script>
+      $('#img_1').on('change', function (e) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#preview_1").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+        $("#img_file_name_1").text(e.target.files[0]["name"]);
+      });
+    </script>
+</tr>
+<!--物件画像1ここまで-->
+
+<!--物件画像2-->
+<tr>
+  <div class="form-group">
+    <th><%= f.label :images, '物件画像2' %></th>
+    <td><%= f.file_field :images, accept: 'image/*', multiple: true, id: "img_2" %></td>
+  </div>
+</tr>
+<tr>
+    <th></th>
+    <td><span id="img_file_name_2">ファイルの名前</span></td>
+</tr>
+<tr>
+    <th></th>
+    <td><img id="preview_2" style="width:15%;"></td>
+    <script>
+      $('#img_2').on('change', function (e) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#preview_2").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+        $("#img_file_name_2").text(e.target.files[0]["name"]);
+      });
+    </script>
+</tr>
+<!--物件画像2ここまで-->
+
+<!--物件画像3-->
+<tr>
+  <div class="form-group">
+    <th><%= f.label :images, '物件画像3' %></th>
+    <td><%= f.file_field :images, accept: 'image/*', multiple: true, id: "img_3" %></td>
+  </div>
+</tr>
+<tr>
+    <th></th>
+    <td><span id="img_file_name_3">ファイルの名前</span</td>
+</tr>
+<tr>
+    <th></th>
+    <td><img id="preview_3" style="width:15%;"></td>
+        <script>
+      $('#img_3').on('change', function (e) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#preview_3").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+        $("#img_file_name_3").text(e.target.files[0]["name"]);
+      });
+    </script>
+</tr>
+<!--物件画像3ここまで-->
+
+
+<!--画像の複数登録の記述ここまで-->
+
+<tr>
+  <div class="form-group">
+    <th><%= f.label :物件種別 %></th>
+    <td><%= f.collection_select :property_type_id, PropertyType.all, :id, :name ,:prompt => "--選択してください--" %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :間取り %></th>
+    <td><%= f.collection_select :floor_plan_id, FloorPlan.all, :id, :name ,:prompt => "--選択してください--" %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :物件メモ %></th>
+    <td><%= f.text_area :description, style: "height: 500px; width: 100%", placeholder:"ここに説明文を記述します。" %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :販売状況 %></th>
+    <!--keys.map {|k| [I18n.t("enums.property.sales_status.#{k}"), k]}   選択肢を１つ１つ取り出して、日本語に変換して並び替える-->
+    <td><%= f.select :sales_status, Property.sales_statuses.keys.map {|k| [I18n.t("enums.property.sales_status.#{k}"), k]}, class: 'sales_status-select' %></td>
+  </div>
+</tr>
+
+<!--ここからが星レビュー機能-->
+<tr>
+  <div class="form-group">
+    <th><%= f.label :評価 %></th>
+    <td>
+      <span id="star">
+        <%= f.hidden_field :star %>
+      </span>
+      <script>
+        // $('#star').empty();              #これがないとブラウザバックで星が増え続ける不具合が発生する。
+        // scoreName: 'property[star]',     #これがpropertyモデルのstarカラムへ値を保存という意味になる。
+        // half: false,                     #今回は５段階評価で⭐️半分評価は入力できないように設定する。
+        $('#star').empty();
+        $('#star').raty({
+          size     : 36,
+          starOff  : '<%= asset_path('star-off.png') %>',
+          starOn   : '<%= asset_path('star-on.png') %>',
+          scoreName: 'property[star]',
+          score    : <%= property.star.nil? ? 0 : property.star %>,
+          half: false,
+        });
+      </script>
+    </td>
+  </div>
+</tr>
+<!--ここまでが星レビュー機能-->
+
+
