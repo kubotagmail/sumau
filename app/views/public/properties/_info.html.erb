@@ -19,43 +19,111 @@
   </div>
 </tr>
 
-<!--画像ひとつだけ登録できるシステムの場合-->
-<!--<tr>-->
-<!--  <div class="form-group">-->
-    <!--<th><%#= f.label :物件画像 %></th>-->
-    <!--<td><%#= f.file_field :image, accept: 'image/*' %></td>-->
-<!--  </div>-->
-<!--</tr>-->
+
 
 <!--画像の複数登録-->
+
 <!--参考
 ・https://magazine.techacademy.jp/magazine/29917#sec3
 ・https://qiita.com/me-654393/items/3b259bbc70f62898bd6f
-・each文で取得する回数の制限 https://qiita.com/bon_eng/items/b44d10b6f3fb86b2ba27-->
+  画像のプレビュー表示
+・https://qiita.com/parkon_hhs/items/b8d7f33294ccbce88d93
+・https://qiita.com/mattan5271/items/34276fce924aded4061a
+・https://qiita.com/kouichi_s/items/1858eb61790ceec843df
+・each文で取得する回数の制限 https://qiita.com/bon_eng/items/b44d10b6f3fb86b2ba27
+-->
+
 <!--
 画像の表示は<%#= image_tag image, width:50, height:50 %>
-画像のファイル名の表示は<%#= image.filename %>-->
+画像のファイル名の表示は<%#= image.filename %>
+-->
+
 <%# property.images.each do |image| %>
   <%#= image.filename %>
 <%# end %>
+
+<!--物件画像1-->
 <tr>
   <div class="form-group">
     <th><%= f.label :images, '物件画像1' %></th>
-    <td><%= f.file_field :images, accept: 'image/*', multiple: true %></td>
+    <td><%= f.file_field :images, accept: 'image/*', multiple: true, id: "img_1" %></td>
   </div>
 </tr>
+<tr>
+    <th></th>
+    <td><span id="img_file_name_1">ファイルの名前</span></td>
+</tr>
+<tr>
+    <th></th>
+    <td><img id="preview_1" style="width:15%;"></td>
+    <script>
+      $('#img_1').on('change', function (e) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#preview_1").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+        $("#img_file_name_1").text(e.target.files[0]["name"]);
+      });
+    </script>
+</tr>
+<!--物件画像1ここまで-->
+
+<!--物件画像2-->
 <tr>
   <div class="form-group">
     <th><%= f.label :images, '物件画像2' %></th>
-    <td><%= f.file_field :images, accept: 'image/*', multiple: true %></td>
+    <td><%= f.file_field :images, accept: 'image/*', multiple: true, id: "img_2" %></td>
   </div>
 </tr>
 <tr>
+    <th></th>
+    <td><span id="img_file_name_2">ファイルの名前</span></td>
+</tr>
+<tr>
+    <th></th>
+    <td><img id="preview_2" style="width:15%;"></td>
+    <script>
+      $('#img_2').on('change', function (e) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#preview_2").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+        $("#img_file_name_2").text(e.target.files[0]["name"]);
+      });
+    </script>
+</tr>
+<!--物件画像2ここまで-->
+
+<!--物件画像3-->
+<tr>
   <div class="form-group">
     <th><%= f.label :images, '物件画像3' %></th>
-    <td><%= f.file_field :images, accept: 'image/*', multiple: true %></td>
+    <td><%= f.file_field :images, accept: 'image/*', multiple: true, id: "img_3" %></td>
   </div>
 </tr>
+<tr>
+    <th></th>
+    <td><span id="img_file_name_3">ファイルの名前</span</td>
+</tr>
+<tr>
+    <th></th>
+    <td><img id="preview_3" style="width:15%;"></td>
+        <script>
+      $('#img_3').on('change', function (e) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#preview_3").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+        $("#img_file_name_3").text(e.target.files[0]["name"]);
+      });
+    </script>
+</tr>
+<!--物件画像3ここまで-->
+
+
 <!--画像の複数登録の記述ここまで-->
 
 <tr>
