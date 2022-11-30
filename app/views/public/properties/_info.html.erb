@@ -45,86 +45,107 @@
 <!--物件画像1-->
 <tr>
   <div class="form-group">
-    <th><%= f.label :images, '物件画像1' %></th>
-    <td><%= f.file_field :images, accept: 'image/*', multiple: true, id: "img_1" %></td>
+    <th><%= f.label :image_1, '物件画像1' %></th>
+    <td><%= f.file_field :image_1, accept: 'image/*' %></td>
   </div>
 </tr>
 <tr>
-    <th></th>
-    <td><span id="img_file_name_1">ファイルの名前</span></td>
+  <th></th>
+  <!--<td><span id="img_file_name_1"></span></td>-->
 </tr>
 <tr>
-    <th></th>
-    <td><img id="preview_1" style="width:15%;"></td>
-    <script>
-      $('#img_1').on('change', function (e) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $("#preview_1").attr('src', e.target.result);
-        }
-        reader.readAsDataURL(e.target.files[0]);
-        $("#img_file_name_1").text(e.target.files[0]["name"]);
-      });
-    </script>
+  <th></th>
+  <td>
+    <img id="preview_1" style="width:15%;">
+    <%# if property.images.length > 0 %>
+      <%#= image_tag property.images[0], width:"15%", id: "property_image_1" %>
+    <%# end %>
+  </td>
+
+  <script>
+    // img_1を選択したりした場合function
+    $('#property_image_1').on('change', function (e) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $("#preview_1").attr('src', e.target.result);
+      }
+      reader.readAsDataURL(e.target.files[0]);
+      //lenght は配列の数、配列の指定は0番目から数える。たとえばlengthが5の時は4番目
+      // if (e.target.files.length > 0){
+      //   // ファイルが選ばれたら既存のimageを消す
+      //   $("#property_image_1").hide()
+      // reader.readAsDataURL(e.target.files[0]);
+      // }
+      // // elseつまり、ファイルの中身がからだったら
+      // else {
+      //   // ファイルの選択が解除されたら元の画像を表示する
+      //   $("#property_image_1").show()
+      //   $("#preview_1").attr('src', "");
+      // }
+      // $("#img_file_name_1").text(e.target.files[0]["name"]);
+    });
+  </script>
 </tr>
 <!--物件画像1ここまで-->
 
 <!--物件画像2-->
 <tr>
   <div class="form-group">
-    <th><%= f.label :images, '物件画像2' %></th>
-    <td><%= f.file_field :images, accept: 'image/*', multiple: true, id: "img_2" %></td>
+    <th><%= f.label :image_2, '物件画像2' %></th>
+    <td><%= f.file_field :image_2, accept: 'image/*' %></td>
   </div>
 </tr>
 <tr>
-    <th></th>
-    <td><span id="img_file_name_2">ファイルの名前</span></td>
+  <th></th>
+  <!--<td><span id="img_file_name_2"></span></td>-->
 </tr>
 <tr>
-    <th></th>
-    <td><img id="preview_2" style="width:15%;"></td>
-    <script>
-      $('#img_2').on('change', function (e) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $("#preview_2").attr('src', e.target.result);
-        }
-        reader.readAsDataURL(e.target.files[0]);
-        $("#img_file_name_2").text(e.target.files[0]["name"]);
-      });
-    </script>
+  <th></th>
+  <td>
+    <img id="preview_2" style="width:15%;">
+    <%# if property.images.length > 1 %>
+      <%#= image_tag property.images[1], width:"15%", id: "property_image_2" %>
+    <%# end %>
+  </td>
+  <script>
+    $('#property_image_2').on('change', function (e) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $("#preview_2").attr('src', e.target.result);
+      }
+      reader.readAsDataURL(e.target.files[0]);
+  </script>
 </tr>
 <!--物件画像2ここまで-->
 
 <!--物件画像3-->
 <tr>
   <div class="form-group">
-    <th><%= f.label :images, '物件画像3' %></th>
-    <td><%= f.file_field :images, accept: 'image/*', multiple: true, id: "img_3" %></td>
+    <th><%= f.label :image_3, '物件画像3' %></th>
+    <td><%= f.file_field :image_3, accept: 'image/*' %></td>
   </div>
 </tr>
 <tr>
-    <th></th>
-    <td><span id="img_file_name_3">ファイルの名前</span</td>
+  <th></th>
+  <!--<td><span id="img_file_name_3"></span></td>-->
 </tr>
 <tr>
-    <th></th>
-    <td><img id="preview_3" style="width:15%;"></td>
-        <script>
-      $('#img_3').on('change', function (e) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $("#preview_3").attr('src', e.target.result);
-        }
-        reader.readAsDataURL(e.target.files[0]);
-        $("#img_file_name_3").text(e.target.files[0]["name"]);
-      });
-    </script>
+  <th></th>
+  <td>
+    <img id="preview_3" style="width:15%;">
+    <%# if property.images.length > 2 %>
+      <%#= image_tag property.images[2], width:"15%", id: "property_image_3" %>
+    <%# end %>
+  </td>
+  <script>
+
+  </script>
 </tr>
 <!--物件画像3ここまで-->
 
 
 <!--画像の複数登録の記述ここまで-->
+
 
 <tr>
   <div class="form-group">

@@ -13,8 +13,8 @@
  *= require_tree .
  *= require_self
  */
- 
- 
+
+
 .pagination>li>a {
   border: none;
   color: #696969;
@@ -32,3 +32,16 @@
 .pagination {
   justify-content: center;
 }
+
+/*#img_1 {*/
+/*  display: none;*/
+/*}*/
+
+/*#img_2 {*/
+/*  display: none;*/
+/*}*/
+
+/*#img_3 {*/
+/*  display: none;*/
+/*}*/
+
