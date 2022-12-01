@@ -15,30 +15,20 @@
       <div class="text-center">
         <!--もし@property.imagesがattachedされていたら、その画像を表示-->
         <!--新規記述-->
-        
+
           <% if @property.image_1.attached? %>
             <%= image_tag @property.image_1, size: "350x350" %>
-          <% elsif @property.image_2.attached? %>
+          <% end %>
+          <% if @property.image_2.attached? %>
             <%= image_tag @property.image_2, size: "350x350" %>
-          <% elsif @property.image_3.attached? %>
+          <% end %>
+          <% if @property.image_3.attached? %>
             <%= image_tag @property.image_3, size: "350x350" %>
-          <% elsif @property.image_1.attached? && @property.image_2.attached? %>
-            <%= image_tag @property.image_1, size: "350x350" %>
-            <%= image_tag @property.image_2, size: "350x350" %>
-          <% elsif @property.image_1.attached? && @property.image_3.attached? %>
-            <%= image_tag @property.image_1, size: "350x350" %>
-            <%= image_tag @property.image_3, size: "350x350" %>
-          <% elsif @property.image_2.attached? && @property.image_3.attached? %>
-            <%= image_tag @property.image_2, size: "350x350" %>
-            <%= image_tag @property.image_3, size: "350x350" %>
-          <% elsif @property.image_1.attached? && @property.image_2.attached? && @property.image_3.attached? %>
-            <%= image_tag @property.image_1, size: "350x350" %>
-            <%= image_tag @property.image_2, size: "350x350" %>
-            <%= image_tag @property.image_3, size: "350x350" %>
-          <% else %>
+          <% end %>
+          <% if !@property.image_1.attached? && !@property.image_2.attached? && !@property.image_3.attached? %>
             <%= image_tag "no_image.jpg", size: "350x350" %>
           <% end %>
-       
+
       </div>
       <!--画像の表示ここまで-->
     </div>
