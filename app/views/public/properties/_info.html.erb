@@ -1,5 +1,4 @@
 <!--public/properties/new.html.erbとpublic/properties/edit.html.erbの部分テンプレート-->
-
 <tr>
   <div class="form-group">
     <th><%= f.label :住所 %></th>
@@ -18,9 +17,6 @@
     <td><%= f.text_field :price, placeholder:"3980" %>万円</td>
   </div>
 </tr>
-
-
-
 <!--画像の複数登録-->
 
 <!--参考
@@ -51,7 +47,6 @@
 </tr>
 <tr>
   <th></th>
-  <!--<td><span id="img_file_name_1"></span></td>-->
 </tr>
 <tr>
   <th></th>
@@ -61,29 +56,6 @@
       <%= image_tag property.image_1, width:"15%", id: "property_image_pre_1" %>
     <% end %>
   </td>
-
-  <script>
-    // img_1を選択したりした場合function
-    $('#property_image_1').on('change', function (e) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-          $("#preview_1").attr('src', e.target.result);
-      }
-      // lenght は配列の数、配列の指定は0番目から数える。たとえばlengthが5の時は4番目
-      if (e.target.files.length > 0){
-        // ファイルが選ばれたら既存のimageを消す
-        $("#property_image_pre_1").hide()
-      reader.readAsDataURL(e.target.files[0]);
-      }
-      // elseつまり、ファイルの中身がからだったら
-      else {
-        // ファイルの選択が解除されたら元の画像を表示する
-        $("#property_image_pre_1").show()
-        $("#preview_1").attr('src', "");
-      }
-      // $("#img_file_name_1").text(e.target.files[0]["name"]);
-    });
-  </script>
 </tr>
 <!--物件画像1ここまで-->
 
@@ -192,69 +164,76 @@
 <!--ここまでが星レビュー機能-->
 
 
+<!--画像部分のJavaScriptの記述-->
+<script>
+  // 画像1の記述ここまで
+  // img_1を選択したりした場合function
+  $('#property_image_1').on('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#preview_1").attr('src', e.target.result);
+    }
+    // lenght は配列の数、配列の指定は0番目から数える。たとえばlengthが5の時は4番目
+    if (e.target.files.length > 0){
+      // ファイルが選ばれたら既存のimageを消す
+      $("#property_image_pre_1").hide()
+    reader.readAsDataURL(e.target.files[0]);
+    }
+    // elseつまり、ファイルの中身がからだったら
+    else {
+      // ファイルの選択が解除されたら元の画像を表示する
+      $("#property_image_pre_1").show()
+      $("#preview_1").attr('src', "");
+    }
+    // $("#img_file_name_1").text(e.target.files[0]["name"]);
+  });
+  // 画像1の記述ここまで
 
-  <script>
-    // img_1を選択したりした場合function
-    $('#property_image_1').on('change', function (e) {
+
+  // 画像2の記述
+    $('#property_image_2').on('change', function (e) {
       var reader = new FileReader();
       reader.onload = function (e) {
-          $("#preview_1").attr('src', e.target.result);
-      }
-      // lenght は配列の数、配列の指定は0番目から数える。たとえばlengthが5の時は4番目
-      if (e.target.files.length > 0){
-        // ファイルが選ばれたら既存のimageを消す
-        $("#property_image_pre_1").hide()
-      reader.readAsDataURL(e.target.files[0]);
-      }
-      // elseつまり、ファイルの中身がからだったら
-      else {
-        // ファイルの選択が解除されたら元の画像を表示する
-        $("#property_image_pre_1").show()
-        $("#preview_1").attr('src', "");
-      }
-      // $("#img_file_name_1").text(e.target.files[0]["name"]);
-    });
+        $("#preview_2").attr('src', e.target.result);
+    }
+    // lenght は配列の数、配列の指定は0番目から数える。たとえばlengthが5の時は4番目
+    if (e.target.files.length > 0){
+      // ファイルが選ばれたら既存のimageを消す
+      $("#property_image_pre_2").hide()
+    reader.readAsDataURL(e.target.files[0]);
+    }
+    // elseつまり、ファイルの中身がからだったら
+    else {
+      // ファイルの選択が解除されたら元の画像を表示する
+      $("#property_image_pre_2").show()
+      $("#preview_2").attr('src', "");
+    }
+    // $("#img_file_name_1").text(e.target.files[0]["name"]);
+  });
+  // 画像2の記述ここまで
 
-    // 画像2の記述
-      $('#property_image_2').on('change', function (e) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-          $("#preview_2").attr('src', e.target.result);
-      }
-      // lenght は配列の数、配列の指定は0番目から数える。たとえばlengthが5の時は4番目
-      if (e.target.files.length > 0){
-        // ファイルが選ばれたら既存のimageを消す
-        $("#property_image_pre_2").hide()
-      reader.readAsDataURL(e.target.files[0]);
-      }
-      // elseつまり、ファイルの中身がからだったら
-      else {
-        // ファイルの選択が解除されたら元の画像を表示する
-        $("#property_image_pre_2").show()
-        $("#preview_2").attr('src', "");
-      }
-      // $("#img_file_name_1").text(e.target.files[0]["name"]);
-    });
-
-      $('#property_image_3').on('change', function (e) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-          $("#preview_3").attr('src', e.target.result);
-      }
-      // lenght は配列の数、配列の指定は0番目から数える。たとえばlengthが5の時は4番目
-      if (e.target.files.length > 0){
-        // ファイルが選ばれたら既存のimageを消す
-        $("#property_image_pre_3").hide()
-      reader.readAsDataURL(e.target.files[0]);
-      }
-      // elseつまり、ファイルの中身がからだったら
-      else {
-        // ファイルの選択が解除されたら元の画像を表示する
-        $("#property_image_pre_3").show()
-        $("#preview_3").attr('src', "");
-      }
-      // $("#img_file_name_1").text(e.target.files[0]["name"]);
-    });
-  </script>
+    // 画像3の記述ここから
+  $('#property_image_3').on('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $("#preview_3").attr('src', e.target.result);
+  }
+    // lenght は配列の数、配列の指定は0番目から数える。たとえばlengthが5の時は4番目
+    if (e.target.files.length > 0){
+      // ファイルが選ばれたら既存のimageを消す
+      $("#property_image_pre_3").hide()
+    reader.readAsDataURL(e.target.files[0]);
+    }
+    // elseつまり、ファイルの中身がからだったら
+    else {
+      // ファイルの選択が解除されたら元の画像を表示する
+      $("#property_image_pre_3").show()
+      $("#preview_3").attr('src', "");
+    }
+    // $("#img_file_name_1").text(e.target.files[0]["name"]);
+  });
+  // 画像3の記述ここまで
+</script>
+<!--画像部分のJavaScriptの記述ここで終わり-->
 
 

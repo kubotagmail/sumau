@@ -15,7 +15,6 @@
       <div class="text-center">
         <!--もし@property.imagesがattachedされていたら、その画像を表示-->
         <!--新規記述-->
-
           <% if @property.image_1.attached? %>
             <%= image_tag @property.image_1, size: "350x350" %>
           <% end %>
