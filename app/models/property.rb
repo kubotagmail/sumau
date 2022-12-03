@@ -2,6 +2,8 @@ class Property < ApplicationRecord
   # has_one_attached :image
   # 画像の複数投稿の場合↓
   # has_many_attached :images
+  
+  # あえて、分けて区別しています。
   has_one_attached :image_1
   has_one_attached :image_2
   has_one_attached :image_3
