@@ -2,7 +2,8 @@
 
 ## サイト概要
 
-### 物件情報の管理サイト
+### サイトテーマ
+物件情報の登録・閲覧サイト
 &emsp; 他のサイトでは、掲載料金がかかるなどの事情で登録されていないような物件情報を、個人で登録でき、さらにその情報までまとめることができます。<br>
 &emsp; 人によって重要視してるポイントが違うと思いますので、気になった物件の特徴や周辺環境、実際に見学してわかったことなどを書くことで、後から振り返ることが出来ます。<br>
 &emsp; 自分が気になった物件情報を登録することで後から閲覧するときに役立つサイトです。<br>
@@ -24,9 +25,9 @@
 - 自分が登録した物件を閲覧したいとき
 
 ## 設計書
-- ER図:　https://app.diagrams.net/#G1oEpXMF_wEAA_bqPfHDrfUDSV-jg8veDH
-- テーブル定義書:　https://docs.google.com/spreadsheets/d/1Q6CCXHkNoccyZBypPoVxUNXnbaY_0L_nCesvF2iGWpw/edit#gid=176020119
-- 詳細設計書:　https://docs.google.com/spreadsheets/d/1JpjwFHbDTdMkF9vnld0u_S5ACQwDame9iX68hQZSAGc/edit#gid=549108681
+ER図:　https://app.diagrams.net/#G1oEpXMF_wEAA_bqPfHDrfUDSV-jg8veDH
+テーブル定義書:　https://docs.google.com/spreadsheets/d/1Q6CCXHkNoccyZBypPoVxUNXnbaY_0L_nCesvF2iGWpw/edit#gid=176020119
+詳細設計書:　https://docs.google.com/spreadsheets/d/1JpjwFHbDTdMkF9vnld0u_S5ACQwDame9iX68hQZSAGc/edit#gid=549108681
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -34,5 +35,6 @@
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
-- Google Map API
 
+## 使用素材
+使用検討中です。
