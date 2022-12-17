@@ -2,10 +2,15 @@ class Public::PropertiesController < ApplicationController
   before_action :authenticate_customer!
 
   def index
-    # ページネーション機能なしの場合は↓
-    # @properties = Property.all
-    # ページネーション機能をつける場合↓
-    @properties = Property.page(params[:page])
+      # ページネーション機能なしの場合は↓
+      # @properties = Property.all
+      # ページネーション機能をつける場合↓
+      # @properties = Property.page(params[:page])
+      # binding.pry
+      
+      # ログイン中のカスタマーが作成した物件情報のみ一覧に表示させたい。
+      @properties = current_customer.properties.page(params[:page])
+      # @properties = Property.where(customer_id: current_customer.id).page(params[:page])
   end
 
   def new
@@ -15,6 +20,10 @@ class Public::PropertiesController < ApplicationController
   def create
     @property = Property.new(property_params)
     @property.customer_id = current_customer.id
+    # スターが存在しないか、もしくは空文字列の時は、０。この記述がないと本番環境下でエラーが生じる。
+    if @property.star.nil? || @property.star == ""
+      @property.star = 0
+    end
     #byebug
     if @property.save
        redirect_to public_properties_path, notice: '新規物件情報の登録が完了しました。'
@@ -26,14 +35,22 @@ class Public::PropertiesController < ApplicationController
 
   def show
     @property = Property.find(params[:id])
+    # もしも@property.customer == current_customerでなければ redirect_to public_properties_path
+    redirect_to public_properties_path unless @property.customer == current_customer
   end
 
   def edit
     @property = Property.find(params[:id])
+    # もしも@property.customer == current_customerでなければ redirect_to public_properties_path
+    redirect_to public_properties_path unless @property.customer == current_customer
   end
 
   def update
     @property = Property.find(params[:id])
+    # updateなのでparamsを使用
+    if params[:property][:star].nil? || params[:property][:star] == ""
+      params[:property][:star] = 0
+    end
     if @property.update(property_params)
       redirect_to public_property_path(@property)
     else
@@ -51,7 +68,8 @@ class Public::PropertiesController < ApplicationController
   private
 
   def  property_params
-    params.require(:property).permit(:customer_id, :floor_plan_id, :property_type_id, :image, :location, :description, :price, :sales_status, :star)
+    params.require(:property).permit(:customer_id, :floor_plan_id, :property_type_id, :image, :location, :description,
+                                     :price, :sales_status, :star, :latitude, :longitude, :name, :image_1, :image_2, :image_3 )
   end
 
 end

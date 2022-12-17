@@ -1,17 +1,43 @@
 <!--会員側 物件詳細画面-->
-<p id="notice"></p>
-<div class="container mt-5 mb-5">
+<div class="container mt-5">
   <div class="row ml-3 mb-3">
     <h2 class="px-3">物件詳細</h2>
   </div>
-  <div class="row text-center text-xs-center text-sm-left text-md-left ">
-    <div class="col-5">
-      <%= image_tag @property.get_image(400,400) %>
+  <div class="row">
+    <div class="mx-auto">
+      <!--ブックマークボタン部分テンプレート呼び出し-->
+      <h2 class="px-3"><%= render 'public/favorites/favorite-btn', property: @property %><%= @property.location %><%= @property.name %></h2>
+
+      <!--画像を一つだけしか投稿できないような設定の場合の記述-->
+      <%#= image_tag @property.get_image(400,400) %>
+
+      <!--画像の表示機能-->
+      <div class="text-center">
+        <!--もし@property.imagesがattachedされていたら、その画像を表示-->
+        <!--新規記述-->
+          <% if @property.image_1.attached? %>
+            <%= image_tag @property.image_1, size: "350x350" %>
+          <% end %>
+          <% if @property.image_2.attached? %>
+            <%= image_tag @property.image_2, size: "350x350" %>
+          <% end %>
+          <% if @property.image_3.attached? %>
+            <%= image_tag @property.image_3, size: "350x350" %>
+          <% end %>
+          <% if !@property.image_1.attached? && !@property.image_2.attached? && !@property.image_3.attached? %>
+            <%= image_tag "no_image.jpg", size: "350x350" %>
+          <% end %>
+
+      </div>
+      <!--画像の表示ここまで-->
     </div>
-    <div class="col-7 item-details mx-auto">
-      <table>
-        <!--ブックマークボタン部分テンプレート呼び出し-->
-        <tr><h2><%= render 'public/favorites/favorite-btn', property: @property %></h2></tr>
+  </div>
+</div>
+
+<div class="container mt-5 px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-5">
+      <table class="table table-bordered">
         <tr>
           <td width="100">物件種別</td>
           <td><%= @property.property_type.name %></td>
@@ -23,8 +49,13 @@
         </tr>
 
         <tr height="20">
-          <td>所在地</td>
+          <td>住所</td>
           <td><%= @property.location %></td>
+        </tr>
+
+        <tr height="20">
+          <td>建物名</td>
+          <td><%= @property.name %></td>
         </tr>
 
         <tr height="20">
@@ -52,24 +83,113 @@
         <!--  </td>-->
           <!--<td><%#= render 'public/favorites/favorite-btn', property: @property %></td>-->
         <!--</tr>-->
-        
+
         <tr>
           <td>評価</td>
           <!--星レビュー部分テンプレート呼び出し-->
-          <%= render 'star', property: @property %> 
+          <%= render 'star', property: @property %>
         </tr>
-  
+
         <tr height="20">
           <td>物件メモ</td>
           <!--< %= simple_format(@property.description) %>simple_formatで改行を反映させる-->
           <td><%= simple_format(@property.description) %></td>
         </tr>
-
-        <tr height="500">
-          <td></td>
-          <td><%= link_to "編集する", edit_public_property_path, class:"btn btn-success" %></td>
-        </tr>
-      <table>
+      </table>
+      <div class="text-center">
+        <%= link_to "編集する", edit_public_property_path, class:"btn btn-success" %>
+      </div>
     </div>
+    <!--ここから右側部分-->
+    <!--
+    ●地図機能の実装、参考ドキュメント
+    ・https://qiita.com/nagase_toya/items/e49977efb686ed05eadb
+    ・https://qiita.com/Sasaki_51660skbb/items/629a7f78e118e3bac1bc
+    -->
+
+    <!--地図機能ここから-->
+    <div class="col-md-7 ">
+    <!--Googleマップ検索フォームここから追加-->
+    <input id="address" type="textbox" value="<%= @property.location %>">
+    <input type="button" value="検索" onclick="codeAddress()">
+    <div id="display"></div>
+    <!--Googleマップ検索フォームはここまで-->
+
+    <!--地図機能再びここから-->
+    <script type="text/javascript">
+      // var で宣言
+      var map
+      function initMap() {
+        geocoder = new google.maps.Geocoder()
+        // #latitude,longitudeから位置を特定
+        // もし@property.latitudeがnilまたは@property.longitudeがnilだった場合var test = {lat: 35.6938253, lng: 139.7033559};
+        <% if @property.latitude == nil || @property.longitude == nil %>
+          var test = {lat: 35.6938253, lng: 139.7033559};
+        <% else %>
+          var test ={lat: <%= @property.latitude %>, lng: <%= @property.longitude %>};
+        <% end %>
+
+        map = new google.maps.Map(document.getElementById('map'), {
+                  center: test,
+                  zoom: 18,
+                  });
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
+
+        var contentString = '住所：<%= @property.location %>';
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+    // Map上の指定した位置にピンを挿して表示する
+        var marker = new google.maps.Marker({
+                      position: test,
+                      map: map,
+                      title: contentString
+                     });
+
+         marker.addListener('click', function() {
+           infowindow.open(map, marker);
+         });
+      }
+
+         function codeAddress(){
+          let inputAddress = document.getElementById('address').value;
+
+          geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+            if (status == 'OK') {
+              map.setCenter(results[0].geometry.location);
+              var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location
+              });
+              // 下の1行を追加
+              display.textContent = "検索結果：" + results[ 0 ].geometry.location
+            } else {
+              alert('該当する結果がありませんでした：' + status);
+            }
+          });
+        }
+    </script>
+
+    <!--以下の記述の中にあるYOUR_API_KEYには取得したご自身のAPIキーを記述してください-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLEMAP"] %>&callback=initMap" async defer>
+    </script>
+    <!--表示するmapのcssです。ご自身でカスタマイズしてください。高さが設定されていないと表示されないことがあります。-->
+    <style type="text/css">
+      #map { height: 600px;
+             width: 600;}
+    </style>
+
+    <!--mapの表示-->
+    <div id="map"></div>
+    <!--地図機能ここまで-->
+
+    </div>
+    <!--右側部分ここまで-->
   </div>
 </div>
+
+
+
+

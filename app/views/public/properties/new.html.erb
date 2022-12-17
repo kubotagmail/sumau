@@ -11,7 +11,7 @@
     <table>
       <!--info部分テンプレート呼び出し-->
       <!--部分テンプレートの中"f."が使えるように、使いたい変数ｆを受け渡す。-->
-      <%= render 'info', f: f %>
+      <%= render 'info', {f: f, property: @property} %>
       <tr>
         <div class="form-action">
           <th><%= f.submit "新規登録", class:"btn btn-success" %></th>

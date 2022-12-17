@@ -1,9 +1,14 @@
 <!--public/properties/new.html.erbとpublic/properties/edit.html.erbの部分テンプレート-->
-
 <tr>
   <div class="form-group">
-    <th><%= f.label :所在地 %></th>
-    <td><%= f.text_field :location, size: "100*20", placeholder:"所在地" %></td>
+    <th><%= f.label :住所 %></th>
+    <td><%= f.text_field :location, size: "100*20", placeholder:"住所" %></td>
+  </div>
+</tr>
+<tr>
+  <div class="form-group">
+    <th><%= f.label :建物名 %></th>
+    <td><%= f.text_field :name, size: "100*20", placeholder:"建物名 ◯◯号室" %></td>
   </div>
 </tr>
 <tr>
@@ -12,12 +17,99 @@
     <td><%= f.text_field :price, placeholder:"3980" %>万円</td>
   </div>
 </tr>
+<!--画像の複数登録-->
+
+<!--参考
+・https://magazine.techacademy.jp/magazine/29917#sec3
+・https://qiita.com/me-654393/items/3b259bbc70f62898bd6f
+  画像のプレビュー表示
+・https://qiita.com/parkon_hhs/items/b8d7f33294ccbce88d93
+・https://qiita.com/mattan5271/items/34276fce924aded4061a
+・https://qiita.com/kouichi_s/items/1858eb61790ceec843df
+・each文で取得する回数の制限 https://qiita.com/bon_eng/items/b44d10b6f3fb86b2ba27
+-->
+
+<!--
+画像の表示は<%#= image_tag image, width:50, height:50 %>
+画像のファイル名の表示は<%#= image.filename %>
+-->
+
+<%# property.images.each do |image| %>
+  <%#= image.filename %>
+<%# end %>
+
+<!--物件画像1-->
 <tr>
   <div class="form-group">
-    <th><%= f.label :物件画像 %></th>
-    <td><%= f.file_field :image, accept: 'image/*' %></td>
+    <th><%= f.label :image_1, '物件画像1' %></th>
+    <td><%= f.file_field :image_1, accept: 'image/*' %></td>
   </div>
 </tr>
+<tr>
+  <th></th>
+</tr>
+<tr>
+  <th></th>
+  <td>
+    <img id="preview_1" style="width:15%;">
+    <% if property.image_1.attached? %>
+      <%= image_tag property.image_1, width:"15%", id: "property_image_pre_1" %>
+    <% end %>
+  </td>
+</tr>
+<!--物件画像1ここまで-->
+
+<!--物件画像2-->
+<tr>
+  <div class="form-group">
+    <th><%= f.label :image_2, '物件画像2' %></th>
+    <td><%= f.file_field :image_2, accept: 'image/*' %></td>
+  </div>
+</tr>
+<tr>
+  <th></th>
+  <!--<td><span id="img_file_name_2"></span></td>-->
+</tr>
+<tr>
+  <th></th>
+  <td>
+    <img id="preview_2" style="width:15%;">
+    <% if property.image_2.attached? %>
+      <%= image_tag property.image_2, width:"15%", id: "property_image_pre_2" %>
+    <% end %>
+  </td>
+</tr>
+<!--物件画像2ここまで-->
+
+<!--物件画像3-->
+<tr>
+  <div class="form-group">
+    <th><%= f.label :image_3, '物件画像3' %></th>
+    <td><%= f.file_field :image_3, accept: 'image/*' %></td>
+  </div>
+</tr>
+<tr>
+  <th></th>
+  <!--<td><span id="img_file_name_3"></span></td>-->
+</tr>
+<tr>
+  <th></th>
+  <td>
+    <img id="preview_3" style="width:15%;">
+    <% if property.image_3.attached? %>
+      <%= image_tag property.image_3, width:"15%", id: "property_image_pre_3" %>
+    <% end %>
+  </td>
+  <script>
+
+  </script>
+</tr>
+<!--物件画像3ここまで-->
+
+
+<!--画像の複数登録の記述ここまで-->
+
+
 <tr>
   <div class="form-group">
     <th><%= f.label :物件種別 %></th>
@@ -43,6 +135,7 @@
     <td><%= f.select :sales_status, Property.sales_statuses.keys.map {|k| [I18n.t("enums.property.sales_status.#{k}"), k]}, class: 'sales_status-select' %></td>
   </div>
 </tr>
+
 <!--ここからが星レビュー機能-->
 <tr>
   <div class="form-group">
@@ -61,6 +154,7 @@
           starOff  : '<%= asset_path('star-off.png') %>',
           starOn   : '<%= asset_path('star-on.png') %>',
           scoreName: 'property[star]',
+          score    : <%= property.star.nil? ? 0 : property.star %>,
           half: false,
         });
       </script>
@@ -68,5 +162,78 @@
   </div>
 </tr>
 <!--ここまでが星レビュー機能-->
+
+
+<!--画像部分のJavaScriptの記述-->
+<script>
+  // 画像1の記述ここまで
+  // img_1を選択したりした場合function
+  $('#property_image_1').on('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#preview_1").attr('src', e.target.result);
+    }
+    // lenght は配列の数、配列の指定は0番目から数える。たとえばlengthが5の時は4番目
+    if (e.target.files.length > 0){
+      // ファイルが選ばれたら既存のimageを消す
+      $("#property_image_pre_1").hide()
+    reader.readAsDataURL(e.target.files[0]);
+    }
+    // elseつまり、ファイルの中身がからだったら
+    else {
+      // ファイルの選択が解除されたら元の画像を表示する
+      $("#property_image_pre_1").show()
+      $("#preview_1").attr('src', "");
+    }
+    // $("#img_file_name_1").text(e.target.files[0]["name"]);
+  });
+  // 画像1の記述ここまで
+
+
+  // 画像2の記述
+    $('#property_image_2').on('change', function (e) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#preview_2").attr('src', e.target.result);
+    }
+    // lenght は配列の数、配列の指定は0番目から数える。たとえばlengthが5の時は4番目
+    if (e.target.files.length > 0){
+      // ファイルが選ばれたら既存のimageを消す
+      $("#property_image_pre_2").hide()
+    reader.readAsDataURL(e.target.files[0]);
+    }
+    // elseつまり、ファイルの中身がからだったら
+    else {
+      // ファイルの選択が解除されたら元の画像を表示する
+      $("#property_image_pre_2").show()
+      $("#preview_2").attr('src', "");
+    }
+    // $("#img_file_name_1").text(e.target.files[0]["name"]);
+  });
+  // 画像2の記述ここまで
+
+    // 画像3の記述ここから
+  $('#property_image_3').on('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $("#preview_3").attr('src', e.target.result);
+  }
+    // lenght は配列の数、配列の指定は0番目から数える。たとえばlengthが5の時は4番目
+    if (e.target.files.length > 0){
+      // ファイルが選ばれたら既存のimageを消す
+      $("#property_image_pre_3").hide()
+    reader.readAsDataURL(e.target.files[0]);
+    }
+    // elseつまり、ファイルの中身がからだったら
+    else {
+      // ファイルの選択が解除されたら元の画像を表示する
+      $("#property_image_pre_3").show()
+      $("#preview_3").attr('src', "");
+    }
+    // $("#img_file_name_1").text(e.target.files[0]["name"]);
+  });
+  // 画像3の記述ここまで
+</script>
+<!--画像部分のJavaScriptの記述ここで終わり-->
 
 

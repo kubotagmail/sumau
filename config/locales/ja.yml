@@ -28,11 +28,14 @@ ja:
         property_type_id: "物件種別"
         floor_plan: "間取り"
         floor_plan_id: "間取り"
-        location: "所在地"
+        location: "住所"
         price: "価格"
         sales_status: "販売状況"
-        
-          
+    errors:
+      messages:
+        record_invalid: "バリデーションに失敗しました: %{errors}"
+
+
   devise:
     confirmations:
       confirmed: 'アカウントを登録しました。'
@@ -96,9 +99,11 @@ ja:
       blank: "が入力されていません。"
       too_short: "は%{count}文字以上に設定して下さい。"
       too_long: "は%{count}文字以下に設定して下さい。"
-      invalid: "は有効でありません。"
+      invalid: "を正しく入力してください。"
       confirmation: "が内容とあっていません。"
       required: "を選択してください。"
       not_a_number: "は半角数字で入力してください。"
- 
+      less_than_or_equal_to: "は0以上9,999,999の範囲で入力してください。"
+      
+
 
