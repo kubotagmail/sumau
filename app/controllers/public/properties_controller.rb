@@ -2,10 +2,15 @@ class Public::PropertiesController < ApplicationController
   before_action :authenticate_customer!
 
   def index
-    # ページネーション機能なしの場合は↓
-    # @properties = Property.all
-    # ページネーション機能をつける場合↓
-    @properties = Property.page(params[:page])
+      # ページネーション機能なしの場合は↓
+      # @properties = Property.all
+      # ページネーション機能をつける場合↓
+      # @properties = Property.page(params[:page])
+      # binding.pry
+      
+      # ログイン中のカスタマーが作成した物件情報のみ一覧に表示させたい。
+      @properties = current_customer.properties.page(params[:page])
+      # @properties = Property.where(customer_id: current_customer.id).page(params[:page])
   end
 
   def new
@@ -30,10 +35,14 @@ class Public::PropertiesController < ApplicationController
 
   def show
     @property = Property.find(params[:id])
+    # もしも@property.customer == current_customerでなければ redirect_to public_properties_path
+    redirect_to public_properties_path unless @property.customer == current_customer
   end
 
   def edit
     @property = Property.find(params[:id])
+    # もしも@property.customer == current_customerでなければ redirect_to public_properties_path
+    redirect_to public_properties_path unless @property.customer == current_customer
   end
 
   def update

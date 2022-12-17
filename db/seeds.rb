@@ -79,6 +79,19 @@ PropertyType.create!(
 
 
 
+ Customer.create!(
+  email: "admin@admin",
+  password: "admin@admin",
+  last_name: "山田",
+  first_name: "花子",
+  last_name_kana: "ヤマダ",
+  first_name_kana: "ハナコ",
+  postal_code: "1040041",
+  address: "東京都中央区新富2丁目",
+  telephone_number: "09012345678",
+  is_deleted: false
+)
+
 
 
 
