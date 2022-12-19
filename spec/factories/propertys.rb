@@ -1,6 +1,8 @@
 # 参考記事
 # https://qiita.com/tofuonfire/items/2ee10bed7a4be3d142fb
 # https://qiita.com/Hyuga-Tsukui/items/57fa77df2b2942414307
+# https://study-diary.hatenadiary.jp/entry/2020/09/23/212400
+# https://qiita.com/komaitaira/items/37f464c17f7cdc61d292
 FactoryBot.define do
   factory :property do
     customer_id {1}
