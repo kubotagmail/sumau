@@ -19,6 +19,18 @@ RSpec.describe 'Propertyモデルのテスト', type: :model do
         expect(Property.reflect_on_association(:floor_plan).macro).to eq :belongs_to
       end
     end
+    
+    context 'property_typeモデルとの関係' do
+      it 'N:1となっている' do
+        expect(Property.reflect_on_association(:property_type).macro).to eq :belongs_to
+      end
+    end
+    
+    context 'customerモデルとの関係' do
+      it 'N:1となっている' do
+        expect(Property.reflect_on_association(:customer).macro).to eq :belongs_to
+      end
+    end
 
   end
 
