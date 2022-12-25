@@ -4,6 +4,26 @@ require 'rails_helper'
 
 RSpec.describe 'Propertyモデルのテスト', type: :model do
 
+  describe '新規物件情報登録のテスト' do
+    
+    context '住所' do
+      it '住所を登録すると、住所が取得できること' do
+        property = Property.new(
+          location: '東京都新宿区新宿1丁目'
+          )
+        expect(property.location).to eq '東京都新宿区新宿1丁目'
+      end
+    end
+  end
+  
+  context '建物名' do
+    it '建物名を登録すると建物名が取得できること' do
+      property = Property.new(
+        name: 'テスト'
+        )
+      expect(property.name).to eq 'テスト'
+    end
+  end
 
 
   describe 'アソシエーションのテスト' do
