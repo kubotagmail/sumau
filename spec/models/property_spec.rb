@@ -34,6 +34,11 @@ RSpec.describe 'Propertyモデルのテスト', type: :model do
     end
   end
 
+  context '物件メモ' do
+    it '物件メモを登録すると物件メモが取得できること'
+    end
+  end
+
 
   describe 'アソシエーションのテスト' do
 
