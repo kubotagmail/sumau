@@ -35,7 +35,11 @@ RSpec.describe 'Propertyモデルのテスト', type: :model do
   end
 
   context '物件メモ' do
-    it '物件メモを登録すると物件メモが取得できること'
+    it '物件メモを登録すると物件メモが取得できること' do
+      property = Property.new(
+        descripion: 'テスト'
+        )
+        expect(property.description).to eq 'テスト'
     end
   end
 
