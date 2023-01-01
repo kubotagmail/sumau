@@ -16,13 +16,13 @@
         <!--もし@property.imagesがattachedされていたら、その画像を表示-->
         <!--新規記述-->
           <% if @property.image_1.attached? %>
-            <%= image_tag @property.image_1, size: "350x350" %>
+            <%= image_tag @property.image_1, width: '33%', height: '33%' %>
           <% end %>
           <% if @property.image_2.attached? %>
-            <%= image_tag @property.image_2, size: "350x350" %>
+            <%= image_tag @property.image_2, width: '33%', height: '33%' %>
           <% end %>
           <% if @property.image_3.attached? %>
-            <%= image_tag @property.image_3, size: "350x350" %>
+            <%= image_tag @property.image_3, width: '33%', height: '33%' %>
           <% end %>
           <% if !@property.image_1.attached? && !@property.image_2.attached? && !@property.image_3.attached? %>
             <%= image_tag "no_image.jpg", size: "350x350" %>
