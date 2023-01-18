@@ -1,31 +1,35 @@
-<h2>管理者側ログインページ</h2>
-<div class="container mt-5">
+<!--管理者側ログイン画面-->
+<div class="container">
   <div class="row">
-    <div class="col-md-2"></div>
-      <div class="col-md-8">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="px-2 mx-auto">
+      <div class="row">
+        <h4 class="my-4 mr-5 px-3">管理者側ログインページ</h4>
       </div>
-    
-      <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password" %>
+      <div class="pl-5">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <table cellpadding="15">
+            <tr>
+              <td><%= f.label :email %></td>
+              <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :password %></td>
+              <td><%= f.password_field :password, autocomplete: "current-password" %></td>
+            </tr>
+  
+            <!--<%# if devise_mapping.rememberable? %>-->
+            <!--  <tr>-->
+            <!--    <td><%#= f.check_box :remember_me %></td>-->
+            <!--    <td><%#= f.label :remember_me %></td>-->
+            <!--  </tr>-->
+            <!--<%# end %>-->
+            <tr>
+              <td></td>
+              <td><%= f.submit "Log in" %></td>
+            </tr>
+          </table>
+        <% end %>
       </div>
-    
-      <% if devise_mapping.rememberable? %>
-        <div class="field">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </div>
-      <% end %>
-    
-      <div class="actions">
-        <%= f.submit "Log in" %>
-      </div>
-    <% end %>
-    
     </div>
   </div>
 </div>
