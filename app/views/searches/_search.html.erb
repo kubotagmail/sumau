@@ -1,6 +1,7 @@
 <!--物件検索用の部分テンプレート-->
 <div class='col-md-14 offset-md-6'>
-  <% if customer_signed_in? %>
+  <%# if customer_signed_in? %>
+  <% if customer = current_customer %>
     <div class="search_form">
       <%= form_with url: search_path, local: true, method: :get do |f| %>
         <%= f.text_field :word, placeholder:"検索" %>
