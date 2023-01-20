@@ -5,8 +5,6 @@
   </div>
   <div class="row mt-5">
     <div class="col-10">
-      <div class="col-5">
-      </div>
       <div class="row mt-5">
         <div class="col-2 ">
           間取り名
@@ -27,7 +25,6 @@
               <th></th>
               <th></th>
             </thead>
-            <tbody>
               <% @floor_plans.each do |floor_plan| %>
                 <tr>
                   <td><%= floor_plan.name %></td>
@@ -39,7 +36,6 @@
                   <td></td>
                 </tr>
               <% end %>
-            </tbody>
           </table>
         </div>
       </div>
