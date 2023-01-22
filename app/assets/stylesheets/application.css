@@ -45,3 +45,7 @@
 /*  display: none;*/
 /*}*/
 
+/*↓エラーメッセージでフォームのレイアウトが崩れるのを防止*/
+.field_with_errors {
+  display: contents;
+}

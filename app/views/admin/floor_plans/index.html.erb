@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-12">
       <div class="row col-12 mb-3 pl-0">
-        <h4 class="mb-0">間取り一覧・追加</h4>
+        <h4>間取り一覧・追加</h4>
       </div>
       <%= form_with model: @floor_plan, url: admin_floor_plans_path, method: :post do |f| %>
         <%= f.text_field :name, placeholder: "間取り名", class: "col-2 ml-5 mr-5" %>
