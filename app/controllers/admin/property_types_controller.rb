@@ -11,7 +11,7 @@ class Admin::PropertyTypesController < ApplicationController
       flash[:notice] = "物件種別名の新規登録に成功しました"
       redirect_to admin_property_types_path
     else
-      flash[:notice] = "物件種別名を入力してください"
+      flash[:alert] = "物件種別名を入力してください"
       @property_types = PropertyType.all
       render :index
     end
