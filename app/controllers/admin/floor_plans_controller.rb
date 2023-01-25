@@ -11,7 +11,7 @@ class Admin::FloorPlansController < ApplicationController
       flash[:notice] = "間取り名の新規登録に成功しました"
       redirect_to admin_floor_plans_path
     else
-      flash[:notice] = "間取り名を入力してください"
+      flash[:alert] = "間取り名を入力してください"
       @floor_plans = FloorPlan.all
       render :index
     end
