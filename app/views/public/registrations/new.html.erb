@@ -19,7 +19,9 @@
             <td></td>
           </th>
           <tr>
-            <td>名前</td>
+            <!--必須項目参考サイト-->
+            <!--https://medium-company.com/rails-adminlte-create/#newhtmlerb-->
+            <td>名前<span class="badge badge-danger">必須</span></td>
             <td>(姓)</td>
             <td><%= f.text_field :last_name, placeholder: "山田" %></td>
             <td>(名)</td>
@@ -33,14 +35,14 @@
             <td><%= f.text_field :first_name_kana, placeholder: "ハナコ" %></td>
           </tr>
           <tr>
-            <td>メールアドレス</td>
+            <td>メールアドレス<span class="badge badge-danger">必須</span></td>
             <td></td>
             <td><%= f.email_field :email, autocomplete: "email", placeholder: "sample@example.com" %></td>
             <td></td>
             <td></td>
           </tr>
           <tr>
-            <td>郵便番号(ハイフンなし)</td>
+            <td>郵便番号(ハイフンなし)<span class="badge badge-danger">必須</span></td>
             <td></td>
             <td><%= f.text_field :postal_code, placeholder: "0000000" %></td>
             <td></td>
@@ -59,7 +61,7 @@
             <td></td>
           </tr>
           <tr>
-            <td>パスワード(6文字以上)</td>
+            <td>パスワード(6文字以上)<span class="badge badge-danger">必須</span></td>
             <td></td>
             <td><%= f.password_field :password, autocomplete: "new-password" %></td>
             <td></td>
