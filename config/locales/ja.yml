@@ -19,6 +19,7 @@ ja:
         first_name_kana: "フリガナ(メイ)"
         address: "住所"
         telephone_number: "電話番号"
+        password_confirmation: "パスワード(確認用)"
       admin:
         email: "メールアドレス"
         password: "パスワード"
@@ -100,10 +101,12 @@ ja:
       too_short: "は%{count}文字以上に設定して下さい。"
       too_long: "は%{count}文字以下に設定して下さい。"
       invalid: "を正しく入力してください。"
-      confirmation: "が内容とあっていません。"
+      # confirmation: "が内容とあっていません。"
+      confirmation: "があっていません。"
       required: "を選択してください。"
       not_a_number: "は半角数字で入力してください。"
       less_than_or_equal_to: "は0以上9,999,999の範囲で入力してください。"
+      
       
 
 
