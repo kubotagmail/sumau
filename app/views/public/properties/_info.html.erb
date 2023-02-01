@@ -1,7 +1,7 @@
 <!--public/properties/new.html.erbとpublic/properties/edit.html.erbの部分テンプレート-->
 <tr>
   <div class="form-group">
-    <th><%= f.label :住所 %></th>
+    <th><%= f.label :住所 %><span class="badge badge-danger">必須</span></th>
     <td><%= f.text_field :location, size: "100*20", placeholder:"住所" %></td>
   </div>
 </tr>
@@ -13,7 +13,7 @@
 </tr>
 <tr>
   <div class="form-group">
-    <th><%= f.label :価格 %></th>
+    <th><%= f.label :価格 %><span class="badge badge-danger">必須</span></th>
     <td><%= f.text_field :price, placeholder:"3980" %>万円</td>
   </div>
 </tr>
@@ -112,13 +112,13 @@
 
 <tr>
   <div class="form-group">
-    <th><%= f.label :物件種別 %></th>
+    <th><%= f.label :物件種別 %><span class="badge badge-danger">必須</span></th>
     <td><%= f.collection_select :property_type_id, PropertyType.all, :id, :name ,:prompt => "--選択してください--" %></td>
   </div>
 </tr>
 <tr>
   <div class="form-group">
-    <th><%= f.label :間取り %></th>
+    <th><%= f.label :間取り %><span class="badge badge-danger">必須</span></th>
     <td><%= f.collection_select :floor_plan_id, FloorPlan.all, :id, :name ,:prompt => "--選択してください--" %></td>
   </div>
 </tr>
